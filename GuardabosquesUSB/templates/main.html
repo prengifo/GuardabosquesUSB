@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-        <title>Bootply.com - Storystrap Template</title>
+        <title>Menú Principal - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -120,8 +120,16 @@ a,a:hover {
   letter-spacing:.08em;
 }
 
-.navbar-bright li > a:hover {
+.navbar-bright li > a:hover, .navbar-bright li > a:active {
   background-color:#019834;
+}
+
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+  background-color:#019834;
+}
+
+.nav>li>a:focus {
+  background-color:#1D723A;
 }
 
 .dropdown-menu {
@@ -226,14 +234,6 @@ a,a:hover {
       </ul>
       <ul class="nav navbar-nav pull-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
-          <ul class="dropdown-menu" style="padding:12px;">
-            <form class="form-inline">
-              <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
-            </form>
-          </ul>
-        </li>
-        <li class="dropdown">
           <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>Usuario<i class="icon-sort-down"></i></a>
           <ul class="dropdown-menu pull-right">
             <li><a href="#">Cerrar Sesion</a></li>
@@ -265,13 +265,6 @@ a,a:hover {
     </div> 
   </div><!-- /cont -->
   
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="top-spacer"> </div>
-      </div>
-    </div> 
-  </div><!-- /cont -->
   
 </div>
 
@@ -290,7 +283,7 @@ a,a:hover {
           <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
-              <a class="story-title" href="http://www.techvisually.com/p/2LmGb0yEsL"><img alt="Repurpose Content to Reach a Wider Audience" src="http://site2img-api.herokuapp.com/1078600787" style="width:100px;height:100px" class="img-circle"></a>
+	      <i style="font-size:7.5em" class="fa fa-list-alt fa-5x"></i>
             </div>
             <div class="col-md-10 col-sm-9">
               <h3>Registro de Actividades</h3>
