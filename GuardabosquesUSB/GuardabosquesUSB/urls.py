@@ -8,7 +8,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', TemplateView.as_view(template_name='login.html')),
+    (r'^accounts/', include('allauth.urls')),
+    url(r'^$', TemplateView.as_view(template_name='account/login.html')),
     url(r'^main/$', TemplateView.as_view(template_name='main.html')),
 
     # Examples:
