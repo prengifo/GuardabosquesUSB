@@ -3,7 +3,6 @@
 <html lang="en">
     <head>
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -95,13 +94,33 @@
            margin-right: auto;
            margin-top:1em;
          }
+
+         .google {
+           background: url('/static/image/GoogleLogin.png') no-repeat center top;
+           box-shadow: 2px 2px 8px rgba(0,0,0,.7);
+           border-radius: 8px;
+           width: 203px;
+           height: 53px;
+           margin: 80px auto;
+           overflow: hidden;
+         }
         </style>
     </head>
 
-
+<body>
     <div id="fullscreen_bg" class="fullscreen_bg"/>
 
     <div class="container">
         <img class="centeredImage" src="{% static 'image/logo_gbusb.png' %}" height=110 width=500>
         {% block content_login %}{% endblock %}
     </div>
+            <script type="text/javascript">
+      (function() {
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       po.src = 'https://apis.google.com/js/client:plusone.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     })();
+    </script>
+
+</body>
+</html>

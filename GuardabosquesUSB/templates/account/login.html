@@ -6,18 +6,28 @@
 
 {% block content_login %}
 
+
 {% block content %}
 
 {% if socialaccount.providers  %}
-<p>{% blocktrans with site.name as site_name %}<a  class="btn btn-primary" style="float:right;margin-top:580px"  href="{{ signup_url }}">Registrate</a>{% endblocktrans %}</p>
+<p>
+    {% blocktrans with site.name as site_name %}
+    <a href="{{ signup_url }}">sign up</a>
+    for a {{site_name}} account and sign in below:{% endblocktrans %}
+</p>
 
-<div class="socialaccount_ballot">
+  <a href="accounts/google/login/?process=login"><div class="google"></div></a>
 
-  <ul class="socialaccount_providers">
-    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
 
-  <div class="login-or">{% trans 'or' %}</div>
+<!-- <div class="socialaccount_ballot">
+
+<button class="socialaccount_providers" >
+{% include "socialaccount/snippets/provider_list.html" with process="login" %}
+</button>
+</div> -->
+
+
+    <div class="login-or">{% trans 'or' %}</div>
 
 </div>
 
@@ -28,15 +38,27 @@
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
 
+<!-- <span id="signinButton">
+<span
+class="g-signin"
+data-callback="signinCallback"
+data-clientid="781812976204-2hahc7rd199rjrcib73vo94co3gthrqf.apps.googleusercontent.com"
+data-cookiepolicy="single_host_origin"
+data-requestvisibleactions="http://schemas.google.com/AddActivity"
+data-scope="https://www.googleapis.com/auth/plus.login">
+</span>
+</span> -->
+
 <form class="login" method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-    {% endif %}
-    <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-    <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
 </form>
+
 
 
 {% endblock %}
