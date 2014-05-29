@@ -220,6 +220,10 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+# auth and allauth settings
+LOGIN_REDIRECT_URL = '/main'
+SOCIALACCOUNT_QUERY_EMAIL = True
+
 
 ########## LOGGING CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#logging
