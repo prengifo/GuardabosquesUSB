@@ -200,7 +200,7 @@ DJANGO_APPS = (
     'allauth.socialaccount',
     # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
-    'login',
+    'GuardabosquesUSB',
 )
 SITE_ID = 1
 

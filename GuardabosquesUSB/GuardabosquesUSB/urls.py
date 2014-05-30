@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
     url(r'^$', TemplateView.as_view(template_name='account/login.html')),
     url(r'^main/$', TemplateView.as_view(template_name='main.html')),
-    url(r'^login/', include('login.urls')),
+    url(r'^registro', TemplateView.as_view(template_name='account/registro.html')),
     # Examples:
     # url(r'^$', 'GuardabosquesUSB.views.home', name='home'),
     # url(r'^GuardabosquesUSB/', include('GuardabosquesUSB.foo.urls')),
