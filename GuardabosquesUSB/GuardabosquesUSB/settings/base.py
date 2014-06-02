@@ -58,10 +58,10 @@ DATABASES = {
 
 ########## GENERAL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'America/Caracas'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
@@ -193,19 +193,21 @@ DJANGO_APPS = (
     # Admin panel and documentation:
     'django.contrib.admin',
     # 'django.contrib.admindocs',
-# The Django sites framework is required
+    # The Django sites framework is required
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
-    'GuardabosquesUSB',
 )
 SITE_ID = 1
 
+ACCOUNT_SIGNUP_FORM_CLASS = 'login.models.SignupForm'
+
 # Apps specific for this project go here.
 LOCAL_APPS = (
+  'login',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

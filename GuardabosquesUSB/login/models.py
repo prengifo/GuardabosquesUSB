@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django import forms
 from django.db import models
 
 CARRERA_CHOICES = (
@@ -36,3 +37,17 @@ class Estudiante(models.Model):
   user    = models.OneToOneField(User)
   carrera = models.IntegerField('carrera', choices=CARRERA_CHOICES)
   carnet  = models.CharField(max_length=8)
+  horas   = models.IntegerField('horas')
+  
+class SignupForm(forms.Form):
+  carrera = models.IntegerField('carrera', choices=CARRERA_CHOICES)
+  carnet  = models.CharField(max_length=8)
+  
+  class Meta:
+    model = Estudiante
+    fields = ('carrera', 'carnet')
+  
+  def save(self, user):
+        user.carrera = self.cleaned_data['carrera']
+        user.carnet = self.cleaned_data['carnet']
+        user.save()

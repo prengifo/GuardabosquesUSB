@@ -2,7 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.forms.models import modelformset_factory
 from django.template import RequestContext
 
-from login.models import Persona
+from login.models import Estudiante
 
 # Create your views here.
 
