@@ -1,12 +1,16 @@
 {% extends "account/base.html" %}
 
 {% load url from future %}
+{% load account %}
+{% load socialaccount %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
 <h1>{% trans "Sign Out" %}</h1>
+
+<h1>HUEVONADAS</h1>
 
 <p>{% trans 'Are you sure you want to sign out?' %}</p>
 
