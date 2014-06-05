@@ -224,12 +224,12 @@ a,a:hover {
   margin-top:1em;
 }
 
-        </style>
+  </style>
     </head>
     
     <!-- HTML code from Bootply.com editor -->
     
-    <body  >
+    <body>
         
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
   <div class="container">
@@ -256,9 +256,15 @@ a,a:hover {
       </ul>
       <ul class="nav navbar-nav pull-right">
         <li class="dropdown">
-          <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>Mi Perfil<i class="icon-sort-down"></i></a>
+          <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
+            {% if request.user.full_name or request.user.short_name %}
+              {{ request.user.full_name }} {{ request.user.short_name }}
+            {% else %}
+              {{ request.user.username }}
+            {% endif %}
+            <i class="icon-sort-down"></i></a>
           <ul class="dropdown-menu pull-right">
-            <li><a href="#">Cerrar Sesion</a></li>
+            <li><a href="/accounts/logout/">Cerrar Sesion</a></li>
           </ul>
         </li>
       </ul>
