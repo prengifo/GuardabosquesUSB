@@ -203,7 +203,6 @@ DJANGO_APPS = (
 )
 SITE_ID = 1
 
-ACCOUNT_SIGNUP_FORM_CLASS = 'login.forms.CustomUserCreationForm'
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
@@ -275,5 +274,3 @@ INSTALLED_APPS += (
 # Don't need to use South when setting up a test database.
 SOUTH_TESTS_MIGRATE = False
 ########## END SOUTH CONFIGURATION
-
-AUTH_USER_MODEL = 'login.CustomUser'
