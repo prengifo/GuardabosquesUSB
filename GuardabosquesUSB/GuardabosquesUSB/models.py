@@ -36,3 +36,9 @@ class Estudiante(models.Model):
   user    = models.OneToOneField(User)
   carrera = models.IntegerField('carrera', choices=CARRERA_CHOICES)
   carnet  = models.CharField(max_length=8)
+
+
+class Actividad(models.Model):
+  estudiante   = models.ForeignKey('Estudiante')
+  horas        = models.IntegerField()
+  descripcion  = models.CharField(max_length=100)

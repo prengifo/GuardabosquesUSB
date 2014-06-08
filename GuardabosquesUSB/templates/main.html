@@ -34,11 +34,6 @@
           }
         </script>
 
-
-
-
-
-
         <!-- CSS code from Bootply.com editor -->
         
         <style type="text/css">
@@ -300,8 +295,20 @@ a,a:hover {
             <br>
 	      <div id="piechart" style="width: 400px; height: 400px;"></div>
 
+        
+
           </div>
-            <iframe src="https://www.google.com/calendar/embed?src=arturo.voltattorni%40gmail.com&ctz=America/Caracas" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+            <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+            <script type="text/javascript">
+                if ( false ) {
+                    var correo = 'https://www.google.com/calendar/embed?src=10-10774@usb.ve';                                    
+                } else {
+                    var correo = '{{ request.user.email }}';
+                }
+
+                document.getElementById("calendario").src = correo;       
+            </script>
           <hr>
       </div>
                                                                                       	                                                
