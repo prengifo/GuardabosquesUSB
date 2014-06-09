@@ -14,28 +14,8 @@
 <div class="inset">
     <h1 class="form-signin-heading text-muted">Iniciar Sesión</h1>
     <a href="{% provider_login_url 'google' %}"><div class="google"></div></a>
-    <div style="margin-bottom:10px;" >O entra directamente</div>
-  
-    <form class="login" method="POST" action="{% url 'account_login' %}">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-          <input id="id_login" class="form-control" maxlength="30" name="login" placeholder="Usuario" type="text" required="" autofocus="" />{{ form.login.errors }}
-          <input id="id_password"  class="form-control" name="password" placeholder="Clave" type="password" required=""/>{{ form.password.errors }}
-          <div class="remember-forgot-section">
-            <input id="id_remember" name="remember" type="checkbox" />
-            <label for="id_remember">Recuérdame</label>
-            <a class="forgot" href="{% url 'account_reset_password' %}">{% trans "Olvidó su Contraseña?" %}</a>
-          </div>
-          
-          {% if redirect_field_value %}
-              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-          {% endif %}
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
-              Iniciar Sesión
-          </button>
-    </form>
     <div class="footnote">
-        No posee cuenta? Entre directamente con Google arriba o <a href="{% url 'account_signup' %}">Regístrate</a>
+        Entra directamente usando tu USBid haciendo click en el botón arriba.
     </div>  
 </div>
 

@@ -203,10 +203,8 @@ DJANGO_APPS = (
 )
 SITE_ID = 1
 
-SOCIALACCOUNT_PROVIDERS = \
-    { 'google':
-        { 'SCOPE': ['https://www.googleapis.com/auth/userinfo.profile'],
-          'AUTH_PARAMS': { 'access_type': 'online' } }}
+        
+ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
