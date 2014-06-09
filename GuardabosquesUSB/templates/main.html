@@ -301,13 +301,10 @@ a,a:hover {
             <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
             <script type="text/javascript">
-                if ( false ) {
-                    var correo = 'https://www.google.com/calendar/embed?src=10-10774@usb.ve';                                    
-                } else {
-                    var correo = '{{ request.user.email }}';
-                }
 
+                var correo = 'https://www.google.com/calendar/embed?src=' + '{{ request.user.email }}';
                 document.getElementById("calendario").src = correo;       
+
             </script>
           <hr>
       </div>
