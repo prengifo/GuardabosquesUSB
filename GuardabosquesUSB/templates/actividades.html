@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-        <title>Menú Principal - Sistema Administrativo Guardabosques USB</title>
+        <title>Registro de Actividades - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -225,9 +225,7 @@ a,a:hover {
     <!-- HTML code from Bootply.com editor -->
     
     <body>
-    
-  {% if dominio %}
-        
+            
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
@@ -242,7 +240,7 @@ a,a:hover {
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
         <li>
-          <a href="/main/actividades">Registro de Actividades</a>
+          <a href="#">Registro de Actividades</a>
         </li>
         <li>
           <a href="#">Bitácora</a>
@@ -284,32 +282,7 @@ a,a:hover {
 
 <div class="container">
   <div class="row">
-    
-    <div class="col-md-12"> 
-      
-      <div class="panel">
-        <div class="panel-body">
-          
-          
-          
-          <!--/stories-->
-          <div class="column">    
-            <br>
-	      <div id="piechart" style="width: 400px; height: 400px;"></div>
-
-        
-
-          </div>
-            <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-
-            <!--<script type="text/javascript">
-
-                var correo = 'https://www.google.com/calendar/embed?src=' + '{{ request.user.email }}';
-                document.getElementById("calendario").src = correo;       
-
-            </script> -->
-          <hr>
-      </div>
+   
                                                                                       	                                                
                                                       
    	</div><!--/col-12-->
@@ -324,11 +297,6 @@ a,a:hover {
 
         <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
-
-
-
-
-        
         <!-- JavaScript jQuery code from Bootply.com editor -->
         
         <script type='text/javascript'>
@@ -342,9 +310,5 @@ a,a:hover {
         </script>
         
     </body>
-    
-    {% else %}
-    <h1>Necesita entrar con una cuenta USB.VE</h1>
-    <h3><a href="/accounts/logout/">Volver a Inicio</a></h3>
-    {% endif %}
+
 </html>

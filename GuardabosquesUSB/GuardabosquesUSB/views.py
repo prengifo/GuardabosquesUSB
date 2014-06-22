@@ -25,7 +25,8 @@ import pdb;
         
 def inicio(request):
     #pdb.set_trace()
-    if request.user.email.endswith('usb.ve'):
+    #if request.user.email.endswith('usb.ve'):
+    if True:
         d = True
         return render(request, 'main.html', {
         'dominio': d,
@@ -35,3 +36,6 @@ def inicio(request):
         return render(request, 'main.html', {
         'dominio': d,
     })
+
+def actividades(request):
+    return render(request, 'actividades.html')
