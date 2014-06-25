@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -282,8 +283,10 @@ a,a:hover {
 
 <div class="container">
   <div class="row">
-   
-                                                                                      	                                                
+    <br><br><br><br>
+    <form action="{% url "GuardabosquesUSB.views.registroActividad" %}" method="POST"> {% csrf_token %} 
+        <input id="registroAct" type="submit" value="Registrar Nueva Actividad" />
+    </form>                                                                              	                                                
                                                       
    	</div><!--/col-12-->
   </div>

@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.template import RequestContext
 #from models import Persona
 from django.contrib.auth.models import User
 import pdb;
@@ -39,3 +40,6 @@ def inicio(request):
 
 def actividades(request):
     return render(request, 'actividades.html')
+
+def registroActividad(request):
+    return render(request, 'registroActividad.html')
