@@ -2,6 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
 #from models import Persona
+from models import ActividadForm
+from login.models import Estudiante
 from django.contrib.auth.models import User
 import pdb;
 
@@ -42,4 +44,18 @@ def actividades(request):
     return render(request, 'actividades.html')
 
 def registroActividad(request):
-    return render(request, 'registroActividad.html')
+    if request.method == 'POST':
+        form = ActividadForm(request.POST) # A form bound to the POST data
+        if form.is_valid():
+            horas = form.cleaned_data['horas']
+            descripcion = form.cleaned_data['descripcion']
+            act = form.save(commit=False)
+            act.estudiante = Estudiante.objects.get(user=request.user)
+            act.save()
+            return render(request, 'main.html' , { 'dominio': True, })
+    else:
+        form = ActividadForm() 
+
+    return render(request, 'registroActividad.html', {
+        'form': form,
+    })
