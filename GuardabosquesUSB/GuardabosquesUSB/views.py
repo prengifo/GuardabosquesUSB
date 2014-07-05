@@ -54,12 +54,18 @@ def inicio(request):
     else:
         d = False
         return render(request, 'main.html', {
-        'dominio': d,
-        'horas': horas,
-    })
+                     'dominio': d,
+                     'horas': horas,
+                     })
 
 def actividades(request):
-    return render(request, 'actividades.html')
+
+    est = Estudiante.objects.get(user=request.user)
+    acts = Actividad.objects.filter(estudiante=est)
+
+    return render(request, 'actividades.html', {
+                  'acts': acts,
+                  })
 
 def registroActividad(request):
     if request.method == 'POST':
@@ -68,12 +74,12 @@ def registroActividad(request):
             horas = form.cleaned_data['horas']
             descripcion = form.cleaned_data['descripcion']
             act = form.save(commit=False)
-            act.estudiante = Estudiante.objects.get(user=request.user)
+            est = Estudiante.objects.get(user=request.user)            
+            act.estudiante = est
             act.save()
 
-            est = Estudiante.objects.get(user=request.user)
-            horas = determinarHoras(est)
-            return render(request, 'main.html' , { 'dominio': True, 'horas': horas, })
+            horasHechas = determinarHoras(est)
+            return render(request, 'main.html' , { 'dominio': True, 'horas': horasHechas, })
 
     else:
         form = ActividadForm() 

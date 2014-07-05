@@ -13,6 +13,7 @@
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
 
 
+
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
           google.load("visualization", "1", {packages:["corechart"]});
@@ -296,7 +297,7 @@ a,a:hover {
           <!--/stories-->
           <div class="column">    
             <br>
-	      <div id="piechart" style="width: 400px; height: 400px;"></div>
+	        <div id="piechart" style="width: 400px; height: 400px;"></div>
 
           </div>
             <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
@@ -307,10 +308,22 @@ a,a:hover {
                 document.getElementById("calendario").src = correo;       
 
             </script> -->
+
+            <script type="text/javascript">
+
+                var correo = 'https://www.google.com/calendar/embed?src=' + 'arturo.voltattorni@gmail.com';
+                document.getElementById("calendario").src = correo;       
+
+            </script>
+
           <hr>
-      </div>
+        </div>
+
+        <div> <!-- Div para la tabla con las actividades -->
+
+        </div>
                                                                                       	                                                
-                                                      
+      </div>                                                
    	</div><!--/col-12-->
   </div>
 </div>

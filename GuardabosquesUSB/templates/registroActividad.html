@@ -13,27 +13,7 @@
         <![endif]-->
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
 
-
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-          google.load("visualization", "1", {packages:["corechart"]});
-          google.setOnLoadCallback(drawChart);
-          function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-              ['Task', 'Horas completadas'],
-              ['Completadas',     45],
-              ['Restantes',      75]
-            ]);
-
-            var options = {
-              title: 'Mis Horas',
-              legend: 'none'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-          }
-        </script>
 
         <!-- CSS code from Bootply.com editor -->
         
@@ -275,9 +255,7 @@ a,a:hover {
         <img class="centeredImage" src="{% static 'image/logo_gbusb.png' %}" height=110 width=500>
       </div>
     </div> 
-  </div><!-- /cont -->
-  
-  
+  </div><!-- /cont --> 
 </div>
 
 

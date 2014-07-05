@@ -14,26 +14,17 @@
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
 
 
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+          
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+          
+        <!-- DataTables -->
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+
+
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-          google.load("visualization", "1", {packages:["corechart"]});
-          google.setOnLoadCallback(drawChart);
-          function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-              ['Task', 'Horas completadas'],
-              ['Completadas',     45],
-              ['Restantes',      75]
-            ]);
-
-            var options = {
-              title: 'Mis Horas',
-              legend: 'none'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-          }
-        </script>
 
         <!-- CSS code from Bootply.com editor -->
         
@@ -281,6 +272,46 @@ a,a:hover {
 </div>
 
 
+<div> <!-- Div para las tablas con las actividades -->
+
+    <table id="table_id" border="1" class="display">
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Horas</th>
+                <th>Validada</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for activ in acts %}
+            <tr>
+                <td> {{ activ.descripcion }} </td>
+                <td> {{ activ.horas }} </td>
+
+                {% if activ.validado %}
+                <td> Sí </td>
+                {% else %}
+                <td> No </td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<!--
+<script type='text/javascript'>
+
+    $(document).ready(function() { 
+        $('#table_id').DataTable();
+    });
+
+</script>
+-->
+
 <div class="container">
   <div class="row">
     <br><br><br><br>
@@ -304,10 +335,8 @@ a,a:hover {
         
         <script type='text/javascript'>
         
-        $(document).ready(function() {
-        
+        $(document).ready(function() { 
             
-        
         });
         
         </script>
