@@ -1,9 +1,10 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-        <title>Menú Principal - Sistema Administrativo Guardabosques USB</title>
+        <title>Registro de Actividades - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -13,28 +14,17 @@
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
 
 
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0/css/jquery.dataTables.css">
+          
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+          
+        <!-- DataTables -->
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+
 
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-          google.load("visualization", "1", {packages:["corechart"]});
-          google.setOnLoadCallback(drawChart);
-          function drawChart() {
-            var resto = 120 - {{ horas }}
-            var data = google.visualization.arrayToDataTable([
-              ['Task', 'Horas completadas'],
-              ['Completadas',     {{ horas }}],
-              ['Restantes',     resto]
-            ]);
-
-            var options = {
-              title: 'Mis Horas',
-              legend: 'none'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-          }
-        </script>
 
         <!-- CSS code from Bootply.com editor -->
         
@@ -227,9 +217,7 @@ a,a:hover {
     <!-- HTML code from Bootply.com editor -->
     
     <body>
-    
-  {% if dominio %}
-        
+            
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
@@ -244,7 +232,7 @@ a,a:hover {
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
         <li>
-          <a href="/main/actividades">Registro de Actividades</a>
+          <a href="#">Registro de Actividades</a>
         </li>
         <li>
           <a href="#">Bitácora</a>
@@ -284,46 +272,53 @@ a,a:hover {
 </div>
 
 
+<div> <!-- Div para las tablas con las actividades -->
+
+    <table id="table_id" border="1" class="display">
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Horas</th>
+                <th>Validada</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for activ in acts %}
+            <tr>
+                <td> {{ activ.descripcion }} </td>
+                <td> {{ activ.horas }} </td>
+
+                {% if activ.validado %}
+                <td> Sí </td>
+                {% else %}
+                <td> No </td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+<!--
+<script type='text/javascript'>
+
+    $(document).ready(function() { 
+        $('#table_id').DataTable();
+    });
+
+</script>
+-->
+
 <div class="container">
   <div class="row">
-    
-    <div class="col-md-12"> 
-      
-      <div class="panel">
-        <div class="panel-body">
-          
-          
-          
-          <!--/stories-->
-          <div class="column">    
-            <br>
-	        <div id="piechart" style="width: 400px; height: 400px;"></div>
-
-          </div>
-            <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-
-            <!--<script type="text/javascript">
-
-                var correo = 'https://www.google.com/calendar/embed?src=' + '{{ request.user.email }}';
-                document.getElementById("calendario").src = correo;       
-
-            </script> -->
-
-            <script type="text/javascript">
-
-                var correo = 'https://www.google.com/calendar/embed?src=' + 'arturo.voltattorni@gmail.com';
-                document.getElementById("calendario").src = correo;       
-
-            </script>
-
-          <hr>
-        </div>
-
-        <div> <!-- Div para la tabla con las actividades -->
-
-        </div>
-                                                                                      	                                                
-      </div>                                                
+    <br><br><br><br>
+    <form action="{% url "GuardabosquesUSB.views.registroActividad" %}" method="POST"> {% csrf_token %} 
+        <input id="registroAct" type="submit" value="Registrar Nueva Actividad" />
+    </form>                                                                              	                                                
+                                                      
    	</div><!--/col-12-->
   </div>
 </div>
@@ -336,27 +331,16 @@ a,a:hover {
 
         <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
-
-
-
-
-        
         <!-- JavaScript jQuery code from Bootply.com editor -->
         
         <script type='text/javascript'>
         
-        $(document).ready(function() {
-        
+        $(document).ready(function() { 
             
-        
         });
         
         </script>
         
     </body>
-    
-    {% else %}
-    <h1>Necesita entrar con una cuenta USB.VE</h1>
-    <h3><a href="/accounts/logout/">Volver a Inicio</a></h3>
-    {% endif %}
+
 </html>
