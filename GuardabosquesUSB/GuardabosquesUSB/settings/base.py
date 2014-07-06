@@ -203,9 +203,6 @@ DJANGO_APPS = (
 )
 SITE_ID = 1
 
-        
-ACCOUNT_USER_MODEL_EMAIL_FIELD = 'email'
-
 # Apps specific for this project go here.
 LOCAL_APPS = (
   'login',
@@ -225,7 +222,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # auth and allauth settings
-LOGIN_REDIRECT_URL = '/main'
+LOGIN_REDIRECT_URL = '/main/home'
 SOCIALACCOUNT_QUERY_EMAIL = True
 
 

@@ -1,31 +1,56 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
-#from models import Persona
 from models import ActividadForm, Actividad
-from login.models import Estudiante
+from login.models import Estudiante, EstudianteForm
 from django.db.models import Count, Min, Sum, Avg
 from django.contrib.auth.models import User
-import pdb;
 
-#def completar_registro(request,correo):
-
-    #default = 0
-    #usr = User.objects.get(email=correo)
-    
-    #if usr.carnet == default:
-        #render(request,'templates/registro.html')
-    #else:
-        #render(request,'templates/main.html')
-
-
-#def insertar(request,correo,crt,crr):
-    
-    #default = 0
-    #usr = User.objects.get(email=correo)
-    #usr.carnet = crt
-    #usr.carrera = crr
-    #usr.save()
+def completar_registro(request):
+  
+    # Vemos si el correo es usb.ve sino lo mandamos palco
+    if request.user.email.endswith('usb.ve'):
+      
+        # Vemos si termino de completas su informacion de usuario
+        try:
+          usr = Estudiante.objects.get(user=request.user)
+        except Estudiante.DoesNotExist:
+          usr = None
+          
+        # Si no lo ha hecho lo mandamos a completar
+        if usr == None:
+            if request.method == 'POST':
+                form = EstudianteForm(request.POST) # A form bound to the POST data
+                if form.is_valid():
+                    est = form.save(commit=False)
+                    est.user = request.user
+                    est.save()
+                    horas = determinarHoras(est)
+                    d = True
+                    return render(request, 'main.html', {
+                                  'dominio': d,
+                                  'horas': horas,
+                                  })
+            else:
+                form = EstudianteForm() 
+                return render(request, 'account/registro.html', {
+                    'form': form,
+                })
+        # Caso contrario bienvenido sea
+        else:
+            horas = determinarHoras(usr)
+            d = True
+            return render(request, 'main.html', {
+                          'dominio': d,
+                          'horas': horas,
+                          })
+    # palco
+    else:
+        d = False
+        return render(request, 'main.html', {
+                      'dominio': d,
+                      'horas': horas,
+                      })
 
 def determinarHoras(est):
 
@@ -38,25 +63,6 @@ def determinarHoras(est):
 
     return horas
 
-def inicio(request):
-
-    est = Estudiante.objects.get(user=request.user)
-    horas = determinarHoras(est)
-
-    #pdb.set_trace()
-    #if request.user.email.endswith('usb.ve'):
-    if True:
-        d = True
-        return render(request, 'main.html', {
-        'dominio': d,
-        'horas': horas,
-        })
-    else:
-        d = False
-        return render(request, 'main.html', {
-                     'dominio': d,
-                     'horas': horas,
-                     })
 
 def actividades(request):
 
@@ -79,11 +85,13 @@ def registroActividad(request):
             act.save()
 
             horasHechas = determinarHoras(est)
-            return render(request, 'main.html' , { 'dominio': True, 'horas': horasHechas, })
+            return render(request, 'main.html' , 
+                          { 'dominio': True, 'horas': horasHechas, })
 
     else:
         form = ActividadForm() 
 
+    # Arturo esto no deberia estar indentado al mismo nivel que la variable form de arriba?
     return render(request, 'registroActividad.html', {
-        'form': form,
-    })
+                  'form': form,
+                  })

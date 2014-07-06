@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.forms import ModelForm
 
 CARRERA_CHOICES = (
     (0, 'Arquitectura'),
@@ -34,5 +35,10 @@ CARRERA_CHOICES = (
 
 class Estudiante(models.Model):
   user    = models.OneToOneField(User)
-  carrera = models.IntegerField('carrera', choices=CARRERA_CHOICES)
-  carnet  = models.CharField(max_length=8)
+  carrera = models.IntegerField('carrera', choices=CARRERA_CHOICES, default=1)
+  carnet  = models.CharField(max_length=8, default="")
+  
+class EstudianteForm(ModelForm):
+  class Meta:
+    model = Estudiante
+    fields = ['carrera', 'carnet']

@@ -35,9 +35,9 @@ CARRERA_CHOICES = (
 )
 
 #class Estudiante(models.Model):
-#  user    = models.OneToOneField(User)
-#  carrera = models.IntegerField('carrera', choices=CARRERA_CHOICES)
-#  carnet  = models.CharField(max_length=8)
+ #user    = models.OneToOneField(User)
+ #carrera = models.IntegerField('carrera', choices=CARRERA_CHOICES)
+ #carnet  = models.CharField(max_length=8)
 
 
 class Actividad(models.Model):
