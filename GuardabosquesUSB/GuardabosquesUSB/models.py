@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django import forms
 from django.db import models
 from login.models import Estudiante
 
@@ -49,4 +50,19 @@ class Actividad(models.Model):
 class ActividadForm(ModelForm):
     class Meta:
         model = Actividad
-        fields = ['validado', 'horas', 'descripcion']
+        fields = ['horas', 'descripcion']
+
+class ValidacionForm(ModelForm):
+    class Meta:
+        model = Actividad
+        fields = ['validado']
+#        widgets = {
+#            'estudiante': forms.HiddenInput(),
+#        }
+
+    def clean_estudiante(self):
+        print "FUI LLAMADO"
+        estudiante = self.cleaned_data['estudiante']
+        if estudiante is None:
+            return self.fields['estudiante'].initial
+        return estudiante

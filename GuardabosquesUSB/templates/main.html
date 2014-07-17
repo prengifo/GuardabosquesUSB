@@ -52,15 +52,15 @@
               </div>
               <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
+                {% if request.user.email == 'arturo.voltattorni@gmail.com' %}
+                  <li>
+                    <a href="/main/validacion">Validación de Horas</a>
+                  </li>
+                {% else %}
                   <li>
                     <a href="/main/actividades">Registro de Actividades</a>
                   </li>
-                  <li>
-                    <a href="#">Bitácora</a>
-                  </li>
-                  <li>
-                    <a href="#">Informe</a>
-                  </li>
+                {% endif %}
                 </ul>
                 <ul class="nav navbar-nav pull-right">
                   <li class="dropdown">
@@ -110,9 +110,7 @@
                           document.getElementById("calendario").src = correo;       
                         </script>
                         <hr>
-                  </div>
-                  <div> <!-- Div para la tabla con las actividades -->
-                  </div>                                                                                                                              
+                  </div>                                                                                                             
               </div>                                                
             </div><!--/col-12-->
           </div>

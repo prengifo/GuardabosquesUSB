@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
     url(r'^$', TemplateView.as_view(template_name='account/login.html')),
     url(r'^main/home', 'GuardabosquesUSB.views.completar_registro', name='registry'),
+    url(r'^main/validacion$', 'GuardabosquesUSB.views.validacion', name='validacion'),
     url(r'^main/actividades$', 'GuardabosquesUSB.views.actividades', name='actividades'),
     url(r'^main/actividades/registroActividad', 'GuardabosquesUSB.views.registroActividad', name='registroActividad'),
     # Examples:

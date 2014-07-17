@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import RequestContext
-from models import ActividadForm, Actividad
+from models import ActividadForm, Actividad, ValidacionForm
 from login.models import Estudiante, EstudianteForm
 from django.db.models import Count, Min, Sum, Avg
 from django.contrib.auth.models import User
@@ -44,14 +44,24 @@ def completar_registro(request):
                           'dominio': d,
                           'horas': horas,
                           })
+
+    elif request.user.email == 'arturo.voltattorni@gmail.com':
+        d = True
+        horas = 0
+        return render(request, 'main.html', {
+                      'dominio': d,
+                      'horas': horas,
+                      })
     # palco
     else:
         d = False
+        horas = 0
         return render(request, 'main.html', {
                       'dominio': d,
                       'horas': horas,
                       })
 
+# Funcion para determinar las horas que ha realizado un estudiante (validadas)
 def determinarHoras(est):
 
     horas = 0
@@ -63,7 +73,7 @@ def determinarHoras(est):
 
     return horas
 
-
+# Funcion para obtener las actividades realizadas por un estudiante
 def actividades(request):
 
     est = Estudiante.objects.get(user=request.user)
@@ -72,6 +82,44 @@ def actividades(request):
     return render(request, 'actividades.html', {
                   'acts': acts,
                   })
+
+
+# Funcion para obtener las actividades sin validar
+def obtenerActividadesSinValidar():
+    i = 1
+    forms = []
+    acts = Actividad.objects.filter(validado=False)
+
+    for x in acts:
+
+        data={'estudiante': x.estudiante}
+
+        cform = []
+        cform.append(ValidacionForm(data, prefix=str(i), instance=x))
+        cform.append(x.estudiante.user.username)
+        cform.append(x.estudiante.carnet)
+        cform.append(x.horas)
+        cform.append(x.descripcion)
+        cform.append(x.estudiante)
+        forms.append(cform)
+        i += 1
+
+    return forms
+
+def validacion(request):
+
+    if request.method == 'POST':
+        form = ValidacionForm(request.POST) # A form bound to the POST data
+        print form.instance.descripcion
+        if form.is_valid():
+            frm = form.save(commit=False)
+            frm.estudiante = form.instance.estudiante_id
+            frm.save()
+
+    cforms = obtenerActividadesSinValidar()
+    print cforms[0][0].instance.horas
+    return render(request, 'validacion.html' , 
+                  { 'forms': cforms, })
 
 def registroActividad(request):
     if request.method == 'POST':
