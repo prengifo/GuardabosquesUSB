@@ -42,15 +42,24 @@ CARRERA_CHOICES = (
 
 
 class Actividad(models.Model):
+
+    ACTIVIDAD_CHOICES= (
+        ('TV', 'Trabajo en vivero'),
+        ('TC', 'Trabajo en campo'),
+        ('JR', 'Jornada de reforestacion'),
+        ('ER', 'Ecorrutas'),
+
+    )
+
     horas        = models.IntegerField()
-    descripcion  = models.CharField(max_length=100)
+    descripcion  = models.CharField(max_length=200, choices=ACTIVIDAD_CHOICES)
     validado     = models.BooleanField(default=False)
     estudiante   = models.ForeignKey('login.Estudiante')
 
 class ActividadForm(ModelForm):
     class Meta:
         model = Actividad
-        fields = ['horas', 'descripcion']
+        fields = ['horas', 'descripcion', 'validado']
 
 class ValidacionForm(ModelForm):
     class Meta:

@@ -143,3 +143,35 @@ def registroActividad(request):
     return render(request, 'registroActividad.html', {
                   'form': form,
                   })
+
+
+# Funcion para obtener todos los estudiantes que no han completado el servicio
+def obtenerEstudiantesFaltantes():
+
+    est = Estudiante.objects.all()
+    listaEst = []
+
+    # Obtener para cada estudiante, sus horas hechas, y si es menor de 120,
+    # guardar su informacion
+    for e in est:
+        horas = determinarHoras(e)
+        actual = []
+        if horas < 120:
+            actual.append(e.user.username)
+            actual.append(e.carnet)
+            actual.append(horas)
+            actual.append(120 - horas)
+            listaEst.append(actual)
+
+    return listaEst
+
+
+# Funcion para mostrar la vista de los estudiantes con sus horas hechas y
+# las que les faltan.
+
+def mostrarEstudiantes(request):
+
+    estudiantes = obtenerEstudiantesFaltantes()
+
+    return render(request, 'horasEstudiantes.html', { 'est': estudiantes, })
+
