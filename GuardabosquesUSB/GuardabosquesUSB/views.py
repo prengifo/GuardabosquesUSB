@@ -100,6 +100,7 @@ def obtenerActividadesSinValidar():
         cform.append(x.estudiante.carnet)
         cform.append(x.horas)
         cform.append(x.descripcion)
+        cform.append(x.fecha)
         cform.append(x.estudiante)
         forms.append(cform)
         i += 1
@@ -124,6 +125,7 @@ def validacion(request):
 def registroActividad(request):
     if request.method == 'POST':
         form = ActividadForm(request.POST) # A form bound to the POST data
+        print form.errors
         if form.is_valid():
             horas = form.cleaned_data['horas']
             descripcion = form.cleaned_data['descripcion']
