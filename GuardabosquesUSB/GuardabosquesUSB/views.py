@@ -45,6 +45,7 @@ def completar_registro(request):
                           'horas': horas,
                           })
 
+    # Caso de un admin o nosotros
     elif request.user.email == 'arturo.voltattorni@gmail.com':
         d = True
         horas = 0

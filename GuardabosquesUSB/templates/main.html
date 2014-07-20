@@ -75,7 +75,7 @@
                       {% endif %}
                       <i class="icon-sort-down"></i></a>
                     <ul class="dropdown-menu pull-right">
-                      <li><a href="/accounts/logout/">Cerrar Sesion</a></li>
+                      <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -139,5 +139,6 @@
     {% else %}
         <h1>Necesita entrar con una cuenta USB.VE</h1>
         <h3><a href="/accounts/logout/">Volver a Inicio</a></h3>
+    </body>
     {% endif %}
 </html>
