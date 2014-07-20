@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django import forms
 from django.db import models
 from login.models import Estudiante
+from datetime import datetime   
 
 CARRERA_CHOICES = (
     (0, 'Arquitectura'),
@@ -55,11 +56,12 @@ class Actividad(models.Model):
     descripcion  = models.CharField(max_length=200, choices=ACTIVIDAD_CHOICES)
     validado     = models.BooleanField(default=False)
     estudiante   = models.ForeignKey('login.Estudiante')
+    fecha        = models.DateTimeField(default=datetime.now())
 
 class ActividadForm(ModelForm):
     class Meta:
         model = Actividad
-        fields = ['horas', 'descripcion', 'validado']
+        fields = ['horas', 'descripcion', 'validado', 'fecha']
 
 class ValidacionForm(ModelForm):
     class Meta:
