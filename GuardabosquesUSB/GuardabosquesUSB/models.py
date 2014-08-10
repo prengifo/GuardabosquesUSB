@@ -61,15 +61,15 @@ class Actividad(models.Model):
 class ActividadForm(ModelForm):
     class Meta:
         model = Actividad
-        fields = ['horas', 'descripcion', 'validado', 'fecha']
+        fields = ['horas', 'descripcion', 'fecha']
 
 class ValidacionForm(ModelForm):
     class Meta:
         model = Actividad
         fields = ['validado']
-#        widgets = {
-#            'estudiante': forms.HiddenInput(),
-#        }
+        widgets = {
+           'estudiante': forms.HiddenInput(),
+        }
 
     def clean_estudiante(self):
         print "FUI LLAMADO"

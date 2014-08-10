@@ -52,7 +52,7 @@
               </div>
               <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
-                {% if request.user.email == 'arturo.voltattorni@gmail.com' %}
+                {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' %}
                   <li>
                     <a href="/main/validacion">Validación de Horas</a>
                   </li>
@@ -74,9 +74,10 @@
                         {{ request.user.username }}
                       {% endif %}
                       <i class="icon-sort-down"></i></a>
-                    <ul class="dropdown-menu pull-right">
-                      <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-                    </ul>
+                      <ul class="dropdown-menu pull-right">
+                        <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
+                        <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+                      </ul>
                   </li>
                 </ul>
               </nav>
@@ -104,12 +105,8 @@
                         <div id="piechart" style="width: 400px; height: 400px;"></div>
                         </div>
                         <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-                        <!--<script type="text/javascript">
-                          var correo = 'https://www.google.com/calendar/embed?src=' + '{{ request.user.email }}';
-                          document.getElementById("calendario").src = correo;       
-                        </script> -->
                         <script type="text/javascript">
-                          var correo = 'https://www.google.com/calendar/embed?src=' + 'arturo.voltattorni@gmail.com';
+                          var correo = 'https://www.google.com/calendar/embed?src=' + '{{request.user.email}}';
                           document.getElementById("calendario").src = correo;       
                         </script>
                         <hr>

@@ -190,6 +190,22 @@ a,a:hover {
 
 #log_out_drop :hover {
   color: #000;
+  border-top: 1px solid;
   border-bottom: 1px solid;
+  background-color:#ccccdd;
+}
+
+#change {
+  color: #019834
+}
+
+#change_drop {
+  background-color:#ccccdd;
+}
+
+#change_drop :hover {
+  color: #000;
+  border-bottom: 1px solid;
+  border-top: 1px solid;
   background-color:#ccccdd;
 }

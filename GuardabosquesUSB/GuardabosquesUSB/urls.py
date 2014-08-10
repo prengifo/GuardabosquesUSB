@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
+from .views import ProfileUpdate
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -12,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
     url(r'^$', TemplateView.as_view(template_name='account/login.html')),
     url(r'^main/home', 'GuardabosquesUSB.views.completar_registro', name='registry'),
+    url(r'^main/actualizar', ProfileUpdate.as_view(), name='update'),
     url(r'^main/validacion$', 'GuardabosquesUSB.views.validacion', name='validacion'),
     url(r'^main/mostrarEstudiantes$', 'GuardabosquesUSB.views.mostrarEstudiantes', name='mostrarEstudiantes'),
     url(r'^main/actividades$', 'GuardabosquesUSB.views.actividades', name='actividades'),

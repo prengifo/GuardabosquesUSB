@@ -17,7 +17,38 @@
 
         <!-- CSS code from Bootply.com editor -->
         
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">      
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">    
+
+        <!-- JavaScript jQuery code from Bootply.com editor -->
+        
+        <script type='text/javascript'>
+          $(document).ready(function() {        
+           });
+        </script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script> 
+
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+          
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+          
+        <!-- DataTables -->
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+
+        <script type="text/javascript" class="init">
+          $(document).ready(function () {
+              $('#table_id').DataTable( {
+                language: {
+                   url: '//cdn.datatables.net/plug-ins/725b2a2115b/i18n/Spanish.json'
+                }
+              });
+          } );
+        </script>
+ 
     </head>
     
     <!-- HTML code from Bootply.com editor -->
@@ -33,28 +64,38 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#" class="navbar-brand">Inicio</a>
+      <a href="/main/home" class="navbar-brand">Inicio</a>
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        <li>
-          <a href="#">Validación de horas</a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav pull-right">
-        <li class="dropdown">
-          <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
-            {% if request.user.full_name or request.user.short_name %}
-              {{ request.user.full_name }} {{ request.user.short_name }}
-            {% else %}
-              {{ request.user.username }}
-            {% endif %}
-            <i class="icon-sort-down"></i></a>
-          <ul class="dropdown-menu pull-right">
-            <li><a href="/accounts/logout/">Cerrar Sesion</a></li>
-          </ul>
-        </li>
-      </ul>
+        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' %}
+          <li>
+            <a href="/main/validacion">Validación de Horas</a>
+          </li>
+          <li>
+            <a href="#">Información de los Estudiantes</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="/main/actividades">Registro de Actividades</a>
+          </li>
+        {% endif %}
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <li class="dropdown">
+            <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
+              {% if request.user.first_name%}
+                {{ request.user.first_name }}
+              {% else %}
+                {{ request.user.username }}
+              {% endif %}
+              <i class="icon-sort-down"></i></a>
+              <ul class="dropdown-menu pull-right">
+                <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
+                <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+              </ul>
+          </li>
+        </ul>
     </nav>
   </div>
 </header>
@@ -72,58 +113,38 @@
 
 <div class="container">
   <div class="row">
-    <br><br><br><br>
-    <div> <!-- Div para las tablas con las actividades -->
-
-        <table id="table_id" border="1" class="display">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Carnet</th>
-                    <th>Horas completadas</th>
-                    <th>Horas restantes</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                {% for cest in est %}
-                <tr>
-                    <td> {{ cest.0 }} </td>
-                    <td> {{ cest.1}} </td>
-                    <td> {{ cest.2}} </td>
-                    <td> {{ cest.3 }} </td>
-
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-    </div>                                                                          	                                                
-                                                      
-   	</div><!--/col-12-->
+    <div class="col-md-12"> 
+      <div class="panel">
+        <div class="panel-body">
+          <!--/stories-->
+          <div class="column">    
+            <br>
+            <table id="table_id" border="1" class="display">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Carnet</th>
+                        <th>Horas completadas</th>
+                        <th>Horas restantes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for cest in est %}
+                  <tr>
+                      <td> {{ cest.0 }} </td>
+                      <td> {{ cest.1}} </td>
+                      <td> {{ cest.2}} </td>
+                      <td> {{ cest.3 }} </td>
+                  </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          </div>                                                                                                             
+      </div>                                                
+    </div><!--/col-12-->
   </div>
-</div>
-                                                
-                                                                                
-<hr>
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-
-        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
-
-        <!-- JavaScript jQuery code from Bootply.com editor -->
-        
-        <script type='text/javascript'>
-        
-        $(document).ready(function() {
-        
-            
-        
-        });
-        
-        </script>
-        
-    </body>
+</div>                                                                  	                                                
+                                                    
+</body>
 
 </html>

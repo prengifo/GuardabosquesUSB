@@ -4,6 +4,8 @@ from django.template import RequestContext
 from models import ActividadForm, Actividad, ValidacionForm
 from login.models import Estudiante, EstudianteForm
 from django.db.models import Count, Min, Sum, Avg
+from django.views.generic.edit import UpdateView
+from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
 
 def completar_registro(request):
@@ -46,7 +48,7 @@ def completar_registro(request):
                           })
 
     # Caso de un admin o nosotros
-    elif request.user.email == 'arturo.voltattorni@gmail.com':
+    elif request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com':
         d = True
         horas = 0
         return render(request, 'main.html', {
@@ -61,6 +63,21 @@ def completar_registro(request):
                       'dominio': d,
                       'horas': horas,
                       })
+
+# Vista para modificar los datos del usuario
+class ProfileUpdate(UpdateView):
+    model = Estudiante
+    template_name = 'account/update.html'
+    form_class = EstudianteForm
+    success_url = reverse_lazy('registry') # This is where the user will be 
+                                       # redirected once the form
+                                       # is successfully filled in
+
+    def get_object(self, queryset=None):
+        '''This method will load the object
+           that will be used to load the form
+           that will be edited'''
+        return self.request.user.estudiante
 
 # Funcion para determinar las horas que ha realizado un estudiante (validadas)
 def determinarHoras(est):
@@ -160,7 +177,9 @@ def obtenerEstudiantesFaltantes():
         horas = determinarHoras(e)
         actual = []
         if horas < 120:
-            actual.append(e.user.username)
+            nombre = e.user.first_name
+            apellido = e.user.last_name
+            actual.append(nombre + " " + apellido)
             actual.append(e.carnet)
             actual.append(horas)
             actual.append(120 - horas)

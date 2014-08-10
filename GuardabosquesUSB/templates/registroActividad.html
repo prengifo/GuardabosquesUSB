@@ -17,7 +17,20 @@
 
         <!-- CSS code from Bootply.com editor -->
         
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">      
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">     
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
+
+        <!-- JavaScript jQuery code from Bootply.com editor -->
+        
+        <script type='text/javascript'>
+        
+          $(document).ready(function() {
+          });
+          
+        </script> 
     </head>
     
     <!-- HTML code from Bootply.com editor -->
@@ -51,6 +64,7 @@
             {% endif %}
             <i class="icon-sort-down"></i></a>
           <ul class="dropdown-menu pull-right">
+            <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
             <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
           </ul>
         </li>
@@ -72,36 +86,22 @@
 
 <div class="container">
   <div class="row">
-    <br><br><br><br>
-    <form action="{% url "GuardabosquesUSB.views.registroActividad" %}" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Registrar" />
-    </form>                                                                           	                                                
-                                                      
-   	</div><!--/col-12-->
+    <div class="col-md-12"> 
+      <div class="panel">
+        <div class="panel-body">
+          <!--/stories-->
+          <div class="column">   
+            <br><br><br><br>
+            <form action="{% url "GuardabosquesUSB.views.registroActividad" %}" method="post">{% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Registrar" />
+            </form>                                                                           	                                                
+          </div>                                                                                                             
+        </div>                                                
+      </div><!--/col-12-->
+    </div>
   </div>
-</div>
-                                                
-                                                                                
-<hr>
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-
-        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
-
-        <!-- JavaScript jQuery code from Bootply.com editor -->
-        
-        <script type='text/javascript'>
-        
-        $(document).ready(function() {
-        
-            
-        
-        });
-        
-        </script>
-        
-    </body>
+<div>     
+</body>
 
 </html>
