@@ -170,6 +170,37 @@ def registroActividad(request):
                   })
 
 
+CARRERA_CHOICES = (
+    (0, 'Arquitectura'),
+    (1, 'Ing. Computacion'),
+    (2, 'Ing. Electrica'),
+    (3, 'Ing. Electronica'),
+    (4, 'Ing. Geofisica'),
+    (5, 'Ing. Mantenimiento'),
+    (6, 'Ing. Materiales'),
+    (7, 'Ing. Mecanica'),
+    (8, 'Ing. Produccion'),
+    (9, 'Ing. Telecomunicaciones'),
+    (10, 'Ing. Quimica'),
+    (11, 'Lic. Biologia'),
+    (12, 'Lic. Comercio Exterior'),
+    (13, 'Lic. Gestion de la Hospitalidad'),
+    (14, 'Lic. Fisica'),
+    (15, 'Lic. Matematica'),
+    (16, 'Lic. Quimica'),
+    (17, 'Urbanismo'),
+    (18, 'Admin. Aduanera'),
+    (19, 'Admin. Hotelera'),
+    (20, 'Admin. Transporte'),
+    (21, 'Admin. Turismo'),
+    (22, 'Comercio Exterior (Carrera Corta)'),
+    (23, 'Mantenimiento Aeronautica'),
+    (24, 'Organizacion Empresarial'),
+    (25, 'Tec. Electrica'),
+    (26, 'Tec. Electronica'),
+    (27, 'Tec. Mecanica'),
+)
+
 # Funcion para obtener todos los estudiantes que no han completado el servicio
 def obtenerEstudiantesFaltantes():
 
@@ -188,6 +219,29 @@ def obtenerEstudiantesFaltantes():
             actual.append(e.carnet)
             actual.append(horas)
             actual.append(120 - horas)
+            actual.append(CARRERA_CHOICES[e.carrera][1])
+            listaEst.append(actual)
+
+    return listaEst
+
+# Funcion para obtener todos los estudiantes que han terminado
+def obtenerEstudiantesFinalizados():
+
+    est = Estudiante.objects.all()
+    listaEst = []
+
+    # Obtener para cada estudiante, sus horas hechas, y si es mayor o igual de 120,
+    # guardar su informacion
+    for e in est:
+        horas = determinarHoras(e)
+        actual = []
+        if horas >= 120:
+            nombre = e.user.first_name
+            apellido = e.user.last_name
+            actual.append(nombre + " " + apellido)
+            actual.append(e.carnet)
+            actual.append(horas)
+            actual.append(CARRERA_CHOICES[e.carrera][1])
             listaEst.append(actual)
 
     return listaEst
@@ -201,4 +255,14 @@ def mostrarEstudiantes(request):
     estudiantes = obtenerEstudiantesFaltantes()
 
     return render(request, 'horasEstudiantes.html', { 'est': estudiantes, })
+
+
+# Funcion para mostrar la vista de los estudiantes que han competado el servicio
+# y quieres revisar su informacion
+
+def mostrarEstudiantesFinalizados(request):
+
+    estudiantes = obtenerEstudiantesFinalizados()
+
+    return render(request, 'horasEstudiantesFinalizados.html', { 'est': estudiantes, })
 
