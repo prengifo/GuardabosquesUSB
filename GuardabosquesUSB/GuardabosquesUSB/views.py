@@ -110,11 +110,12 @@ def obtenerActividadesSinValidar():
 
     for x in acts:
 
-        data={'estudiante': x.estudiante}
+        data = {'estudiante': x.estudiante}
 
         cform = []
-        cform.append(ValidacionForm(data, prefix=str(i), instance=x))
-        cform.append(x.estudiante.user.username)
+        cform.append(ValidacionForm(instance = x))
+        cform.append(x.estudiante.user.first_name)
+        cform.append(x.estudiante.user.last_name)
         cform.append(x.estudiante.carnet)
         cform.append(x.horas)
         cform.append(x.descripcion)
@@ -127,26 +128,30 @@ def obtenerActividadesSinValidar():
 
 def validacion(request):
 
-    if request.method == 'POST':
-        form = ValidacionForm(request.POST) # A form bound to the POST data
-        print form.instance.descripcion
-        if form.is_valid():
-            frm = form.save(commit=False)
-            frm.estudiante = form.instance.estudiante_id
-            frm.save()
-
     cforms = obtenerActividadesSinValidar()
-    print cforms[0][0].instance.horas
     return render(request, 'validacion.html' , 
                   { 'forms': cforms, })
+
+def guardarValidacion(request, id):
+
+    print(id)
+    act = Actividad.objects.get(pk = id)
+    print(act.descripcion)
+    form = ValidacionForm(request.POST, instance = act) # A form bound to the POST data
+    if form.is_valid():
+        form.save()
+        print('SALVE')
+
+    cforms = obtenerActividadesSinValidar()
+    return render(request, 'validacion.html' , 
+                  { 'forms': cforms, })
+
 
 def registroActividad(request):
     if request.method == 'POST':
         form = ActividadForm(request.POST) # A form bound to the POST data
         print form.errors
         if form.is_valid():
-            horas = form.cleaned_data['horas']
-            descripcion = form.cleaned_data['descripcion']
             act = form.save(commit=False)
             est = Estudiante.objects.get(user=request.user)            
             act.estudiante = est
