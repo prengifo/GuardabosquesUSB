@@ -1,0 +1,23 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load url from future %}
+
+{% block content_login %}
+{% load socialaccount %}
+
+
+{% block content %}
+
+
+<div class="inset">
+    <h1 class="form-signin-heading text-muted">Iniciar Sesión</h1>
+    <a href="{% provider_login_url 'google' %}"><div class="google"></div></a>
+    <div class="footnote">
+        Entra directamente usando tu USBid haciendo click en el botón arriba.
+    </div>  
+</div>
+
+{% endblock %}
+{% endblock %}
