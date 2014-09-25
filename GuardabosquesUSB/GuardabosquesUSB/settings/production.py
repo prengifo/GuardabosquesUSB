@@ -21,7 +21,7 @@ def get_env_setting(setting):
 
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = ['localhost', '.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 ########## END HOST CONFIGURATION
 
 ########## EMAIL CONFIGURATION
@@ -63,15 +63,16 @@ CACHES = {
 }
 ########## END CACHE CONFIGURATION
 
-# Static asset configuration
+########## STATIC FILE CONFIGURATION
 import os
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'static'
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, 'static'),
 )
+########## END STATIC FILE CONFIGURATION
 
 
 ########## SECRET CONFIGURATION
