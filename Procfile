@@ -1,1 +1,1 @@
-web: gunicorn GuardabosquesUSB.wsgi --log-file -
+web: gunicorn --pythonpath GuardabosquesUSB GuardabosquesUSB.wsgi --log-file -
