@@ -5,3 +5,5 @@
 gunicorn==0.17.4
 dj-static
 dj-database-url
+psycopg2==2.5.2
+django-toolbelt==0.0.1
