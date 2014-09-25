@@ -52,7 +52,7 @@
               </div>
               <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
-                {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' %}
+                {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
                   <li>
                     <a href="/main/validacion">Validación de Horas</a>
                   </li>
@@ -79,10 +79,16 @@
                         {{ request.user.username }}
                       {% endif %}
                       <i class="icon-sort-down"></i></a>
-                      <ul class="dropdown-menu pull-right">
-                        <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
-                        <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-                      </ul>
+                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
+                        <ul class="dropdown-menu pull-right">
+                          <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+                        </ul>
+                        {% else %}
+                        <ul class="dropdown-menu pull-right">
+                          <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
+                          <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+                        </ul>
+                        {% endif %}
                   </li>
                 </ul>
               </nav>
@@ -107,11 +113,14 @@
                   <!--/stories-->
                   <div class="column">    
                     <br>
+                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
+                        {% else %}
                         <div id="piechart" style="width: 400px; height: 400px;"></div>
                         </div>
+                        {% endif %}
                         <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
                         <script type="text/javascript">
-                          var correo = 'https://www.google.com/calendar/embed?src=' + '{{request.user.email}}';
+                          var correo = 'https://www.google.com/calendar/embed?src=usb.guardaboques.app@gmail.com';
                           document.getElementById("calendario").src = correo;       
                         </script>
                         <hr>
