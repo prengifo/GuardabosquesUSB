@@ -48,7 +48,10 @@ def completar_registro(request):
                           })
 
     # Caso de un admin o nosotros
-    elif request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com':
+    elif (request.user.email == 'arturo.voltattorni@gmail.com' 
+            or request.user.email == 'danielar92@gmail.com'
+            or request.user.email == 'patrick.rengifo@gmail.com' 
+            or request.user.email == 'usb.guardaboques.app@gmail.com'):
         d = True
         horas = 0
         return render(request, 'main.html', {
@@ -57,6 +60,7 @@ def completar_registro(request):
                       })
     # palco
     else:
+        print(request.user.email)
         d = False
         horas = 0
         return render(request, 'main.html', {

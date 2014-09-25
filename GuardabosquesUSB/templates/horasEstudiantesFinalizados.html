@@ -68,7 +68,7 @@
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' %}
+          {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
           <li>
             <a href="/main/validacion">Validación de Horas</a>
           </li>
@@ -95,10 +95,16 @@
                 {{ request.user.username }}
               {% endif %}
               <i class="icon-sort-down"></i></a>
-              <ul class="dropdown-menu pull-right">
-                <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
-                <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-              </ul>
+                {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
+                  <ul class="dropdown-menu pull-right">
+                    <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+                  </ul>
+                  {% else %}
+                  <ul class="dropdown-menu pull-right">
+                    <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
+                    <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+                  </ul>
+                  {% endif %}
           </li>
         </ul>
     </nav>
