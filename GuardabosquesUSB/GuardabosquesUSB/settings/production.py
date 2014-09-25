@@ -63,6 +63,9 @@ CACHES = {
 }
 ########## END CACHE CONFIGURATION
 
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
 STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 STATICFILES_DIRS = (
