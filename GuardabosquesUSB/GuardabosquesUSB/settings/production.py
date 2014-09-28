@@ -21,7 +21,7 @@ def get_env_setting(setting):
 
 ########## HOST CONFIGURATION
 # See: https://docs.djangoproject.com/en/1.5/releases/1.5/#allowed-hosts-required-in-production
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 ########## END HOST CONFIGURATION
 
 ########## EMAIL CONFIGURATION
@@ -51,39 +51,17 @@ SERVER_EMAIL = EMAIL_HOST_USER
 ########## END EMAIL CONFIGURATION
 
 ########## DATABASE CONFIGURATION
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {}
 ########## END DATABASE CONFIGURATION
+
 
 ########## CACHE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    }
-}
+CACHES = {}
 ########## END CACHE CONFIGURATION
-
-########## STATIC FILE CONFIGURATION
-# Absolute filesystem path to the Django project directory:
-DJANGO_ROOT = dirname(dirname(abspath(__file__)))
-
-# Absolute filesystem path to the top-level project folder:
-SITE_ROOT = dirname(DJANGO_ROOT)
-STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    normpath(join(SITE_ROOT, 'static')),
-)
-########## END STATIC FILE CONFIGURATION
 
 
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-# SECRET_KEY = get_env_setting('SECRET_KEY')
-SECRET_KEY = r"+e3_jio0z&219i0!htgvca&vcq%ypu)^_xrk1oo&^5s%$$j9d*"
+SECRET_KEY = get_env_setting('SECRET_KEY')
 ########## END SECRET CONFIGURATION
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
