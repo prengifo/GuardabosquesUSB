@@ -51,7 +51,9 @@ SERVER_EMAIL = EMAIL_HOST_USER
 ########## END EMAIL CONFIGURATION
 
 ########## DATABASE CONFIGURATION
-DATABASES = {}
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
 ########## END DATABASE CONFIGURATION
 
 ########## CACHE CONFIGURATION
@@ -64,13 +66,16 @@ CACHES = {
 ########## END CACHE CONFIGURATION
 
 ########## STATIC FILE CONFIGURATION
-import os
-PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = 'staticfiles'
+# Absolute filesystem path to the Django project directory:
+DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+
+# Absolute filesystem path to the top-level project folder:
+SITE_ROOT = dirname(DJANGO_ROOT)
+STATIC_ROOT = normpath(join(SITE_ROOT, 'assets'))
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, 'static'),
+    normpath(join(SITE_ROOT, 'static')),
 )
 ########## END STATIC FILE CONFIGURATION
 
