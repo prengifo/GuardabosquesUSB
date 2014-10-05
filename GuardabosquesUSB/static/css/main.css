@@ -209,3 +209,26 @@ a,a:hover {
   border-top: 1px solid;
   background-color:#ccccdd;
 }
+
+#registroAct
+ {
+  color:#fff;
+  background: #1d7239;
+  padding: 4.5px 9px;
+  border-radius: 7px;
+}
+
+#registroAct:hover {
+  color:#fff;
+  border-top-color: #019834;
+  background: #019834;
+}
+#registroAct:active {
+  color:#fff;
+  border-top-color: #019834;
+  background: #019834;
+}
+
+#selected {
+  background-color:#019834;
+}

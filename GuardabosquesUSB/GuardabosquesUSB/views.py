@@ -51,7 +51,7 @@ def completar_registro(request):
     elif (request.user.email == 'arturo.voltattorni@gmail.com' 
             or request.user.email == 'danielar92@gmail.com'
             or request.user.email == 'patrick.rengifo@gmail.com' 
-            or request.user.email == 'usb.guardaboques.app@gmail.com'):
+            or request.user.email == 'app.guardabosques@gmail.com'):
         d = True
         horas = 0
         return render(request, 'main.html', {

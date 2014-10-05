@@ -68,11 +68,11 @@
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-          {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
+          {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
           <li>
             <a href="/main/validacion">Validación de Horas</a>
           </li>
-          <li class="dropdown">
+          <li id="selected" class="dropdown">
             <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">Información de los Estudiantes</a><i class="icon-user"></i>
             <i class="icon-sort-down"></i></a>
             <ul class="dropdown-menu pull-right">
@@ -110,17 +110,6 @@
     </nav>
   </div>
 </header>
-
-<div id="masthead">  
-  <div class="container">
-    <div class="row">
-      <div class="col-md-7">
-        <img class="centeredImage" src="{% static 'image/logo_gbusb.png' %}" height=110 width=500>
-      </div>
-    </div> 
-  </div><!-- /cont --> 
-</div>
-
 
 <div class="container">
   <div class="row">
