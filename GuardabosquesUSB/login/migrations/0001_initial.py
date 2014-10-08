@@ -12,8 +12,8 @@ class Migration(SchemaMigration):
         db.create_table(u'login_estudiante', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
-            ('carrera', self.gf('django.db.models.fields.IntegerField')()),
-            ('carnet', self.gf('django.db.models.fields.CharField')(max_length=8)),
+            ('carrera', self.gf('django.db.models.fields.IntegerField')(default=1)),
+            ('carnet', self.gf('django.db.models.fields.CharField')(default='', max_length=8)),
         ))
         db.send_create_signal(u'login', ['Estudiante'])
 
@@ -62,8 +62,8 @@ class Migration(SchemaMigration):
         },
         u'login.estudiante': {
             'Meta': {'object_name': 'Estudiante'},
-            'carnet': ('django.db.models.fields.CharField', [], {'max_length': '8'}),
-            'carrera': ('django.db.models.fields.IntegerField', [], {}),
+            'carnet': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '8'}),
+            'carrera': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
         }

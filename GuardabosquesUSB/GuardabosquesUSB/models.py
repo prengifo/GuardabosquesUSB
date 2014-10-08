@@ -3,7 +3,19 @@ from django.forms import ModelForm
 from django import forms
 from django.db import models
 from login.models import Estudiante
-from datetime import datetime   
+from datetime import datetime
+
+
+class TipoActividad(models.Model):
+    nombre = models.CharField(max_length = 200)
+
+    def __unicode__(self):
+        return self.nombre
+
+class TipoActividadForm(ModelForm):
+    class Meta:
+        model = TipoActividad
+        fields = ['nombre']
 
 class Actividad(models.Model):
 
@@ -16,7 +28,7 @@ class Actividad(models.Model):
     )
 
     horas        = models.IntegerField()
-    descripcion  = models.CharField(max_length=200, choices=ACTIVIDAD_CHOICES)
+    descripcion  = models.ForeignKey(TipoActividad)
     validado     = models.BooleanField(default=False)
     estudiante   = models.ForeignKey('login.Estudiante')
     fecha        = models.DateTimeField(default=datetime.now())

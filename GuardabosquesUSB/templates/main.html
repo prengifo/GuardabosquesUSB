@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <title>Menú Principal - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -34,11 +34,11 @@
         </script>
         <link href="{% static 'css/main.css' %}" rel="stylesheet">
     </head>
-    
+
     <body>
-    
+
     {% if dominio %}
-        
+
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
             <div class="container">
               <div class="navbar-header">
@@ -54,7 +54,10 @@
                 <ul class="nav navbar-nav">
                 {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
                   <li>
-                    <a href="/main/validacion">Validación de Horas</a>
+                    <a href="/main/validacion">Validar de Horas</a>
+                  </li>
+                  <li>
+                      <a href ="/main/actividades/registroTipoActividad"> Crear Actividad</a>
                   </li>
                   <li class="dropdown">
                     <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">Información de los Estudiantes</a><i class="icon-user"></i>
@@ -79,7 +82,7 @@
                         {{ request.user.username }}
                       {% endif %}
                       <i class="icon-sort-down"></i></a>
-                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
+                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
                         <ul class="dropdown-menu pull-right">
                           <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
                         </ul>
@@ -97,11 +100,11 @@
 
         <div class="container">
           <div class="row">
-            <div class="col-md-12"> 
+            <div class="col-md-12">
               <div class="panel">
                 <div class="panel-body">
                   <!--/stories-->
-                  <div class="column">    
+                  <div class="column">
                     <br>
                         {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
                         {% else %}
@@ -110,12 +113,12 @@
                         {% endif %}
                         <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
                         <script type="text/javascript">
-                          var correo = 'https://www.google.com/calendar/embed?src=usb.guardaboques.app@gmail.com';
-                          document.getElementById("calendario").src = correo;       
+                          var correo = 'https://www.google.com/calendar/embed?src=app.guardabosques@gmail.com';
+                          document.getElementById("calendario").src = correo;
                         </script>
                         <hr>
-                  </div>                                                                                                             
-              </div>                                                
+                  </div>
+              </div>
             </div><!--/col-12-->
           </div>
         </div>
@@ -124,19 +127,19 @@
         <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
         <!-- JavaScript jQuery code from Bootply.com editor -->
-        
+
         <script type='text/javascript'>
-        
+
         $(document).ready(function() {
-        
-            
-        
+
+
+
         });
-        
+
         </script>
-        
+
     </body>
-    
+
     {% else %}
         <h1>Necesita entrar con una cuenta USB.VE</h1>
         <h3><a href="/accounts/logout/">Volver a Inicio</a></h3>

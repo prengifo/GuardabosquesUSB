@@ -7,18 +7,19 @@ from django.db.models import Count, Min, Sum, Avg
 from django.views.generic.edit import UpdateView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
+# from braces.views import
 
 def completar_registro(request):
-  
+
     # Vemos si el correo es usb.ve sino lo mandamos palco
     if request.user.email.endswith('usb.ve'):
-      
+
         # Vemos si termino de completas su informacion de usuario
         try:
           usr = Estudiante.objects.get(user=request.user)
         except Estudiante.DoesNotExist:
           usr = None
-          
+
         # Si no lo ha hecho lo mandamos a completar
         if usr == None:
             if request.method == 'POST':
@@ -34,7 +35,7 @@ def completar_registro(request):
                                   'horas': horas,
                                   })
             else:
-                form = EstudianteForm() 
+                form = EstudianteForm()
                 return render(request, 'account/registro.html', {
                     'form': form,
                 })
@@ -48,9 +49,9 @@ def completar_registro(request):
                           })
 
     # Caso de un admin o nosotros
-    elif (request.user.email == 'arturo.voltattorni@gmail.com' 
+    elif (request.user.email == 'arturo.voltattorni@gmail.com'
             or request.user.email == 'danielar92@gmail.com'
-            or request.user.email == 'patrick.rengifo@gmail.com' 
+            or request.user.email == 'patrick.rengifo@gmail.com'
             or request.user.email == 'app.guardabosques@gmail.com'):
         d = True
         horas = 0
@@ -73,7 +74,7 @@ class ProfileUpdate(UpdateView):
     model = Estudiante
     template_name = 'account/update.html'
     form_class = EstudianteForm
-    success_url = reverse_lazy('registry') # This is where the user will be 
+    success_url = reverse_lazy('registry') # This is where the user will be
                                        # redirected once the form
                                        # is successfully filled in
 
@@ -133,7 +134,7 @@ def obtenerActividadesSinValidar():
 def validacion(request):
 
     cforms = obtenerActividadesSinValidar()
-    return render(request, 'validacion.html' , 
+    return render(request, 'validacion.html' ,
                   { 'forms': cforms, })
 
 def guardarValidacion(request, id):
@@ -147,7 +148,7 @@ def guardarValidacion(request, id):
         print('SALVE')
 
     cforms = obtenerActividadesSinValidar()
-    return render(request, 'validacion.html' , 
+    return render(request, 'validacion.html' ,
                   { 'forms': cforms, })
 
 
@@ -157,16 +158,16 @@ def registroActividad(request):
         print form.errors
         if form.is_valid():
             act = form.save(commit=False)
-            est = Estudiante.objects.get(user=request.user)            
+            est = Estudiante.objects.get(user=request.user)
             act.estudiante = est
             act.save()
 
             horasHechas = determinarHoras(est)
-            return render(request, 'main.html' , 
+            return render(request, 'main.html' ,
                           { 'dominio': True, 'horas': horasHechas, })
 
     else:
-        form = ActividadForm() 
+        form = ActividadForm()
 
     # Arturo esto no deberia estar indentado al mismo nivel que la variable form de arriba?
     return render(request, 'registroActividad.html', {
@@ -270,3 +271,16 @@ def mostrarEstudiantesFinalizados(request):
 
     return render(request, 'horasEstudiantesFinalizados.html', { 'est': estudiantes, })
 
+from .models import TipoActividad, TipoActividadForm
+from django.views.generic import CreateView, ListView
+class TipoActividadCreateView(CreateView):
+    model = TipoActividad
+    form_class = TipoActividadForm
+    success_url = '/main/actividades/lista'
+    template_name = 'crearTipoActividad.html'
+
+
+class TipoActividadListView(ListView):
+    model = TipoActividad
+    template_name = 'listaTipoActividad.html'
+    context_object_name = 'objects'
