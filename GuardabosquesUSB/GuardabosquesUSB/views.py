@@ -272,7 +272,7 @@ def mostrarEstudiantesFinalizados(request):
     return render(request, 'horasEstudiantesFinalizados.html', { 'est': estudiantes, })
 
 from .models import TipoActividad, TipoActividadForm
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 class TipoActividadCreateView(CreateView):
     model = TipoActividad
     form_class = TipoActividadForm
@@ -284,3 +284,8 @@ class TipoActividadListView(ListView):
     model = TipoActividad
     template_name = 'listaTipoActividad.html'
     context_object_name = 'objects'
+
+
+class TipoActividadDeleteView(DeleteView):
+    model = TipoActividad
+    success_url = '/main/actividades/lista'
