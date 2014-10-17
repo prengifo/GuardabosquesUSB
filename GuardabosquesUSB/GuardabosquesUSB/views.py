@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.template import RequestContext
 from models import ActividadForm, Actividad, ValidacionForm
@@ -133,9 +134,16 @@ def obtenerActividadesSinValidar():
 
 def validacion(request):
 
-    cforms = obtenerActividadesSinValidar()
-    return render(request, 'validacion.html' ,
-                  { 'forms': cforms, })
+    # Si eres admin puedes validar, sino fuck off
+    if (request.user.email == 'arturo.voltattorni@gmail.com'
+            or request.user.email == 'danielar92@gmail.com'
+            or request.user.email == 'patrick.rengifo@gmail.com'
+            or request.user.email == 'app.guardabosques@gmail.com'):
+        cforms = obtenerActividadesSinValidar()
+        return render(request, 'validacion.html' ,
+                      { 'forms': cforms, })
+    else:
+        return HttpResponseRedirect(reverse('GuardabosquesUSB.views.completar_registro'))
 
 def guardarValidacion(request, id):
 
