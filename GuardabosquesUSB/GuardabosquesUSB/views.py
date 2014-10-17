@@ -297,3 +297,14 @@ class TipoActividadListView(ListView):
 class TipoActividadDeleteView(DeleteView):
     model = TipoActividad
     success_url = '/main/actividades/lista'
+
+def calendario(request):
+
+    return render(request, 'calendario.html')
+
+def horasAcumuladas(request):
+    est = request.user
+    horas = determinarHoras(est)
+    return render(request, 'horasAcumuladas.html', {
+                  'horas': horas,
+                  })

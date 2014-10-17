@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Menú Principal - Sistema Administrativo Guardabosques USB</title>
+        <title>Calendario - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -12,12 +12,30 @@
         <![endif]-->
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+          google.load("visualization", "1", {packages:["corechart"]});
+          google.setOnLoadCallback(drawChart);
+          function drawChart() {
+            var resto = 120 - {{ horas }}
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Horas completadas'],
+              ['Completadas',     {{ horas }}],
+              ['Restantes',     resto]
+            ]);
+
+            var options = {
+              title: 'Mis Horas',
+              legend: 'none'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+          }
+        </script>
         <link href="{% static 'css/main.css' %}" rel="stylesheet">
     </head>
 
     <body>
-
-    {% if dominio %}
 
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
             <div class="container">
@@ -28,10 +46,10 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-brand">Inicio</a>
+                <a href="/main/home" class="navbar-brand">Inicio</a>
               </div>
               <nav class="collapse navbar-collapse" role="navigation">
-                <ul class="nav navbar-nav">
+                                <ul class="nav navbar-nav">
                 {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
                   <li>
                     <a href="/main/validacion">Validación de Horas</a>
@@ -39,8 +57,8 @@
                   <li>
                       <a href ="/main/actividades/registroTipoActividad">Crear Actividad</a>
                   </li>
-                  <li>
-                    <a href="/main/calendario">Calendario</a>
+                  <li id="selected">
+                    <a href="#">Calendario</a>
                   </li>
                   <li class="dropdown">
                     <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">Información de los Estudiantes</a><i class="icon-user"></i>
@@ -54,8 +72,8 @@
                   <li>
                     <a href="/main/actividades">Registro de Actividades</a>
                   </li>
-                  <li>
-                    <a href="/main/calendario">Calendario</a>
+                  <li id="selected">
+                    <a href="#">Calendario</a>
                   </li>
                   <li>
                     <a href="/main/horas">Horas Acumuladas</a>
@@ -95,6 +113,11 @@
                   <!--/stories-->
                   <div class="column">
                     <br>
+                        <iframe id="calendario" style="border: 0" width="1100" height="600" frameborder="0" scrolling="no"></iframe>
+                        <script type="text/javascript">
+                          var correo = 'https://www.google.com/calendar/embed?src=app.guardabosques@gmail.com';
+                          document.getElementById("calendario").src = correo;
+                        </script>
                         <hr>
                   </div>
               </div>
@@ -118,10 +141,4 @@
         </script>
 
     </body>
-
-    {% else %}
-        <h1>Necesita entrar con una cuenta USB.VE</h1>
-        <h3><a href="/accounts/logout/">Volver a Inicio</a></h3>
-    </body>
-    {% endif %}
 </html>
