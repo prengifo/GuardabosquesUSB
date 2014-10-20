@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <title>Validación de Actividades - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,28 +16,28 @@
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
         <!-- CSS code from Bootply.com editor -->
-        
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">   
+
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
         <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
         <!-- JavaScript jQuery code from Bootply.com editor -->
-        
+
         <script type='text/javascript'>
-        
+
         $(document).ready(function() {
-        
+
         });
-        
-        </script>   
+
+        </script>
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body>
-            
+
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
@@ -96,38 +96,62 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-12">
       <div class="panel">
         <div class="panel-body">
           <!--/stories-->
-          <div class="column">   
-            <br><br><br><br>
-            {% for cf in forms %}
+          <div class="column">
+            <br>
+            <table id="table_id" border="1" class="display">
+                <thead>
+                    <tr>
+                        <th style="text-align:center">Nombres</th>
+                        <th style="text-align:center">Apellidos</th>
+                        <th style="text-align:center">Carnet</th>
+                        <th style="text-align:center">Horas</th>
+                        <th style="text-align:center">Actividad</th>
+                        <th style="text-align:center">Fecha</th>
+                        <th style="text-align:center">Validar</th>
+                        <th style="text-align:center"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for cest in forms %}
 
-                <form action="{% url 'GuardabosquesUSB.views.guardarValidacion' cf.0.instance.id %}" method="post">
-                  {% csrf_token %}
+                  <tr>
+                      <td> {{ cest.1 }} </td>
+                      <td> {{ cest.2 }} </td>
+                      <td> {{ cest.3 }} </td>
+                      <td style="text-align:center"> {{ cest.4 }} </td>
+                      <td> {{ cest.5 }} </td>
+                      <td> {{ cest.6 }}   </td>
+                      <td style="padding: 5px">
 
-                  {{ cf.1 }}
-                  {{ cf.2 }}
-                  {{ cf.3 }}
-                  {{ cf.4 }}
-                  {{ cf.5 }}
-                  {{ cf.6 }}
-                  {{ cf.0.as_p }}
-
-                  <input type="submit" value="Validar" />
-                </form>          
-                
-                   
-            {% endfor %}                             
-         </div>                                                                                                             
-        </div>                                                
-      </div><!--/col-12-->
-    </div>
+                <form action="{% url 'GuardabosquesUSB.views.guardarValidacion' cest.0.instance.id %}" method="post">
+                          {{ cest.0.as_p }}
+                    {% csrf_token %}
+                                      <input type="submit" value="Validar" />
+                </form>
+                      </td>
+                  </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+          </div>
+      </div>
+    </div><!--/col-12-->
   </div>
-<div> 
-                                                                                                  
+  </div>
+
 <hr>
-</body>
+    </body>
+
+    <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
+        <p>
+      <img src="/static/image/logo.png" height="40" width="40" style="
+    margin-top: -15px;
+           margin-left: 30px;">   Creado por DevLab USB
+        </p>
+    </footer>
 
 </html>

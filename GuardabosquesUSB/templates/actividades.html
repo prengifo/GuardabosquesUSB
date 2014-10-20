@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <title>Registro de Actividades - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -14,26 +14,26 @@
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
 
         <!-- CSS code from Bootply.com editor -->
-        
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">    
+
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
         <!-- JavaScript jQuery code from Bootply.com editor -->
-        
+
         <script type='text/javascript'>
-          $(document).ready(function() {        
+          $(document).ready(function() {
            });
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script> 
+        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
         <!-- DataTables CSS -->
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
-          
+
         <!-- jQuery -->
         <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-          
+
         <!-- DataTables -->
         <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
 
@@ -47,11 +47,11 @@
           } );
         </script>
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body>
-            
+
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
@@ -102,14 +102,14 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-12">
       <div class="panel">
         <div class="panel-body">
           <!--/stories-->
           <div class="column">
-            <form action="{% url "GuardabosquesUSB.views.registroActividad" %}"> {% csrf_token %} 
+            <form action="{% url "GuardabosquesUSB.views.registroActividad" %}"> {% csrf_token %}
               <input id="registroAct" type="submit" value="Registrar Nueva Actividad" />
-            </form>      
+            </form>
             <br><br><br>
             <div> <!-- Div para las tablas con las actividades -->
               <table id="table_id" border="1" class="display">
@@ -137,13 +137,21 @@
                       {% endfor %}
                   </tbody>
               </table>
-            </div>           
-          </div>                                                                                                             
-        </div>                                                
+            </div>
+          </div>
+        </div>
       </div><!--/col-12-->
     </div>
   </div>
-<div>     
+  <div>
 </body>
+
+    <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
+        <p>
+      <img src="/static/image/logo.png" height="40" width="40" style="
+    margin-top: -15px;
+           margin-left: 30px;">   Creado por DevLab USB
+        </p>
+    </footer>
 
 </html>
