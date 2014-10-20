@@ -12,26 +12,6 @@
         <![endif]-->
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-          google.load("visualization", "1", {packages:["corechart"]});
-          google.setOnLoadCallback(drawChart);
-          function drawChart() {
-            var resto = 120 - {{ horas }}
-            var data = google.visualization.arrayToDataTable([
-              ['Task', 'Horas completadas'],
-              ['Completadas',     {{ horas }}],
-              ['Restantes',     resto]
-            ]);
-
-            var options = {
-              title: 'Mis Horas',
-              legend: 'none'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-          }
-        </script>
         <link href="{% static 'css/main.css' %}" rel="stylesheet">
     </head>
 
@@ -111,15 +91,19 @@
               <div class="panel">
                 <div class="panel-body">
                   <!--/stories-->
-                  <div class="column">
+                  <div class="column" style="text-align:center">
+                    <p>
+                      Visualice los eventos próximos en los cuales podrá participar.
+                    </p>
                     <br>
-                        <iframe id="calendario" style="border: 0" width="1100" height="600" frameborder="0" scrolling="no"></iframe>
+                        <iframe id="calendario" style="border: 0" width="1000" height="500" frameborder="0" scrolling="no"></iframe>
                         <script type="text/javascript">
                           var correo = 'https://www.google.com/calendar/embed?src=app.guardabosques@gmail.com';
                           document.getElementById("calendario").src = correo;
                         </script>
                         <hr>
                   </div>
+                </div>
               </div>
             </div><!--/col-12-->
           </div>
@@ -142,7 +126,7 @@
 
     </body>
 
-        <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
+    <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
         <p>
       <img src="/static/image/logo.png" height="40" width="40" style="
     margin-top: -15px;

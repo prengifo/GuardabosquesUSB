@@ -92,8 +92,13 @@
       <div class="panel">
         <div class="panel-body">
           <!--/stories-->
-          <div class="column">
-            <br><br><br><br>
+          <div class="column" style="text-align:center">
+            <p>
+              Agregue las nuevas actividades para que los estudiantes suban sus horas.
+            </p>
+          </div>
+          <div class-"column">
+            <br><br>
             <form action="{% url "registroTipoActividad" %}" method="post">{% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Registrar" />
