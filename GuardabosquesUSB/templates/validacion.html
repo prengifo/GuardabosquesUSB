@@ -4,7 +4,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Validación de Actividades - Sistema Administrativo Guardabosques USB</title>
+        <title>Registro de Actividades - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -13,24 +13,38 @@
         <![endif]-->
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
 
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
         <!-- CSS code from Bootply.com editor -->
 
         <link href="{% static 'css/main.css' %}" rel="stylesheet">
+
+        <!-- JavaScript jQuery code from Bootply.com editor -->
+
+        <script type='text/javascript'>
+          $(document).ready(function() {
+           });
+        </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
         <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
-        <!-- JavaScript jQuery code from Bootply.com editor -->
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
 
-        <script type='text/javascript'>
+        <!-- jQuery -->
+        <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 
-        $(document).ready(function() {
+        <!-- DataTables -->
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
 
-        });
-
+        <script type="text/javascript" class="init">
+          $(document).ready(function () {
+              $('#table_id').DataTable( {
+                language: {
+                   url: '//cdn.datatables.net/plug-ins/725b2a2115b/i18n/Spanish.json'
+                }
+              });
+          } );
         </script>
     </head>
 
@@ -112,7 +126,6 @@
                         <th style="text-align:center">Actividad</th>
                         <th style="text-align:center">Fecha</th>
                         <th style="text-align:center">Validar</th>
-                        <th style="text-align:center"> </th>
                     </tr>
                 </thead>
                 <tbody>
