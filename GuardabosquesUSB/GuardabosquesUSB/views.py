@@ -72,12 +72,10 @@ def completar_registro(request):
                     est = form.save(commit=False)
                     est.user = request.user
                     est.save()
-                    horas = determinarHoras(est)
                     d = True
                     a = es_admin(request.user.email)
                     return render(request, 'main.html', {
                                   'dominio': d,
-                                  'horas': horas,
                                   'admin': a,
                                   })
             else:
@@ -87,11 +85,9 @@ def completar_registro(request):
                 })
         # Caso contrario bienvenido sea
         else:
-            horas = determinarHoras(usr)
             a = es_admin(request.user.email)
             return render(request, 'main.html', {
                           'dominio': True,
-                          'horas': horas,
                           'admin': a,
                           })
 
@@ -99,7 +95,6 @@ def completar_registro(request):
     elif (es_admin(request.user.email)):
         return render(request, 'main.html', {
                       'dominio': True,
-                      'horas': 0,
                       'admin' : True
                       })
     # palco
@@ -107,7 +102,6 @@ def completar_registro(request):
         print(request.user.email)
         return render(request, 'main.html', {
                       'dominio': False,
-                      'horas': 0,
                       })
 
 # Vista para modificar los datos del usuario
@@ -311,11 +305,9 @@ class TipoActividadDeleteView(DeleteView):
     success_url = '/main/actividades/registroTipoActividad'
 
 # Funcion para obtener las actividades realizadas y validadas por un estudiante
-def actividadesValidadas(request):
+def actividadesValidadas(est):
 
-    est = Estudiante.objects.get(user=request.user)
     acts = Actividad.objects.filter(estudiante=est, validado=True)
-
     listaAct = []
 
     # Obtener para cada estudiante, sus horas hechas, y si es mayor o igual de 120,
@@ -336,9 +328,9 @@ def calendario(request):
         })
 
 def horasAcumuladas(request):
-    est = request.user
+    est = Estudiante.objects.get(user=request.user)
     horas = determinarHoras(est)
-    actividades = actividadesValidadas(request)
+    actividades = actividadesValidadas(est)
     return render(request, 'horasAcumuladas.html', {
                   'horas': horas,
                   'actividades': actividades,
