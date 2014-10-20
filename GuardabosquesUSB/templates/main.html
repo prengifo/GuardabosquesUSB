@@ -92,9 +92,22 @@
             <div class="col-md-12">
               <div class="panel">
                 <div class="panel-body">
-                  <!--/stories-->
-                  <div class="column">
+                  <div class="column" style="text-align:center">
                     <br>
+                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
+                        <p>
+                          Bienvenido al Sistema de Administración del Servicio Comunitario de los Guardabosques de la Universidad Simón Bolívar.
+                          Como administrador podrá ver información de los estudiantes que se encuentran actualmente en el servicio, o ya lo han culminado.
+                          Validar las horas de las actividades registradas por los estudiantes, crear eventos futuros y nuevas actividades.
+                        </p>
+                        {% else %}
+                        <p>
+                          Bienvenido al Sistema de Administración del Servicio Comunitario de los Guardabosques de la Universidad Simón Bolívar.
+                          Como estudiante podrá visulizar la agenda de las actividades a realizarse en los próximos días, administrar sus horas,
+                          y consultar las actividades realizadas.
+                        </p>
+                        {% endif %}
+                        <img class="centeredImage" src="{% static 'image/logo_gbusb.png' %}" height=110 width=500>
                         <hr>
                   </div>
               </div>
