@@ -1,18 +1,18 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Horas Acumuladas- Sistema Administrativo Guardabosques USB</title>
-        <meta name="generator" content="Bootply" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Horas Acumuladas - Sistema Administrativo Guardabosques USB</title>
+  <meta name="generator" content="Bootply" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript">
+          <![endif]-->
+          <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
+          <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+          <script type="text/javascript">
           google.load("visualization", "1", {packages:["corechart"]});
           google.setOnLoadCallback(drawChart);
           function drawChart() {
@@ -21,7 +21,7 @@
               ['Task', 'Horas completadas'],
               ['Completadas',     {{ horas }}],
               ['Restantes',     resto]
-            ]);
+              ]);
 
             var options = {
               title: 'Mis Horas',
@@ -31,95 +31,130 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
           }
-        </script>
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">
-    </head>
+  </script>
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
-    <body>
+  <!-- JavaScript jQuery code from Bootply.com editor -->
 
-        <header class="navbar navbar-bright navbar-fixed-top" role="banner">
-            <div class="container">
-              <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a href="/main/home" class="navbar-brand">Inicio</a>
+  <script type='text/javascript'>
+  $(document).ready(function() {
+  });
+  </script>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
+
+  <!-- jQuery -->
+  <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
+  <!-- DataTables -->
+  <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
+
+  <script type="text/javascript" class="init">
+  $(document).ready(function () {
+    $('#table_id').DataTable( {
+      language: {
+       url: '//cdn.datatables.net/plug-ins/725b2a2115b/i18n/Spanish.json'
+     }
+   });
+  } );
+  </script>
+  
+</head>
+
+<body>
+
+  <header class="navbar navbar-bright navbar-fixed-top" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/main/home" class="navbar-brand">Inicio</a>
+      </div>
+      <nav class="collapse navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="/main/actividades">Registro de Actividades</a>
+          </li>
+          <li>
+            <a href="/main/calendario">Calendario</a>
+          </li>
+          <li id="selected">
+            <a href="#">Horas Acumuladas</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <li class="dropdown">
+            <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
+              {% if request.user.first_name%}
+              {{ request.user.first_name }}
+              {% else %}
+              {{ request.user.username }}
+              {% endif %}
+              <i class="icon-sort-down"></i></a>
+              <ul class="dropdown-menu pull-right">
+                <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
+                <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container" id="main">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel">
+            <div class="panel-body">
+              <div class="column" style="text-align:center">
+                <p>
+                  Visualice las horas validadas que ha realizado durante el Servicio, y su porcentaje de completación.
+                </p>
+                <br>
+                <table id="table_id" border="1" class="display">
+                  <thead>
+                    <tr>
+                      <th style="text-align:center">Descripción</th>
+                      <th style="text-align:center">Horas realizadas</th>
+                      <th style="text-align:center">Fecha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for act in actividades %}
+                    <tr>
+                      <td> {{ cest.1 }} </td>
+                      <td> {{ cest.2 }} </td>
+                      <td> {{ cest.3 }} </td>
+                      <td style="padding: 5px"> </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <hr>
+                <div id="piechart" style="width: 400px; height: 400px;"></div>
               </div>
-              <nav class="collapse navbar-collapse" role="navigation">
-                <ul class="nav navbar-nav">
-                  <li>
-                    <a href="/main/actividades">Registro de Actividades</a>
-                  </li>
-                  <li>
-                    <a href="/main/calendario">Calendario</a>
-                  </li>
-                  <li id="selected">
-                    <a href="#">Horas Acumuladas</a>
-                  </li>
-                </ul>
-                <ul class="nav navbar-nav pull-right">
-                  <li class="dropdown">
-                    <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
-                      {% if request.user.first_name%}
-                        {{ request.user.first_name }}
-                      {% else %}
-                        {{ request.user.username }}
-                      {% endif %}
-                      <i class="icon-sort-down"></i></a>
-                        <ul class="dropdown-menu pull-right">
-                          <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
-                          <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-                        </ul>
-                  </li>
-                </ul>
-              </nav>
             </div>
-        </header>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel">
-                <div class="panel-body">
-                  <!--/stories-->
-                  <div class="column" style="text-align:center">
-                    <p>
-                      Visualice las horas validadas que ha realizado durante el Servicio, y su porcentaje de completación.
-                    </p>
-                    <br>
-                    <div id="piechart" style="width: 400px; height: 400px;"></div>
-                    <hr>
-                  </div>
-              </div>
-            </div><!--/col-12-->
-          </div>
+          </div><!--/col-12-->
         </div>
-        <hr>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
-
-        <!-- JavaScript jQuery code from Bootply.com editor -->
-
-        <script type='text/javascript'>
-
-        $(document).ready(function() {
-
-
-
-        });
-
-        </script>
-
-    </body>
-
-        <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
+      </div>
+      <footer>
         <p>
-      <img src="/static/image/logo.png" height="40" width="40" style="
-    margin-top: -15px;
-           margin-left: 30px;">   Creado por DevLab USB
+          <img src="/static/image/logo.png" height="40" width="40" style="
+          margin-top: -15px;
+          margin-left: 30px;">   Creado por DevLab USB
         </p>
-    </footer>
+      </footer>
+    </div>
+
+</body>
+
+
 </html>

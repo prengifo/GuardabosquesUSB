@@ -305,6 +305,25 @@ class TipoActividadDeleteView(DeleteView):
     model = TipoActividad
     success_url = '/main/actividades/lista'
 
+# Funcion para obtener las actividades realizadas y validadas por un estudiante
+def actividadesValidadas(request):
+
+    est = Estudiante.objects.get(user=request.user)
+    acts = Actividad.objects.filter(estudiante=est, validado=True)
+
+    listaAct = []
+
+    # Obtener para cada estudiante, sus horas hechas, y si es mayor o igual de 120,
+    # guardar su informacion
+    for a in acts:
+        actual = []
+        actual.append(a.descripcion)
+        actual.append(a.horas)
+        actual.append(a.fecha)
+        listaAct.append(actual)
+
+    return listaAct
+
 def calendario(request):
     a = es_admin(request.user.email)
     return render(request, 'calendario.html', {
@@ -314,6 +333,8 @@ def calendario(request):
 def horasAcumuladas(request):
     est = request.user
     horas = determinarHoras(est)
+    actividades = actividadesValidadas(request)
     return render(request, 'horasAcumuladas.html', {
                   'horas': horas,
+                  'actividades': actividades,
                   })
