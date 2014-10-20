@@ -285,8 +285,13 @@ from django.views.generic import CreateView, ListView, DeleteView
 class TipoActividadCreateView(CreateView):
     model = TipoActividad
     form_class = TipoActividadForm
-    success_url = '/main/actividades/lista'
+    success_url = '/main/actividades/registroTipoActividad'
     template_name = 'crearTipoActividad.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(TipoActividadCreateView, self).get_context_data(**kwargs)
+        ctx['actividades'] = TipoActividad.objects.all()
+        return ctx
 
 
 class TipoActividadListView(ListView):
@@ -297,7 +302,7 @@ class TipoActividadListView(ListView):
 
 class TipoActividadDeleteView(DeleteView):
     model = TipoActividad
-    success_url = '/main/actividades/lista'
+    success_url = '/main/actividades/registroTipoActividad'
 
 def calendario(request):
 
