@@ -149,7 +149,8 @@ def guardarValidacion(request, id):
 
     print(id)
     act = Actividad.objects.get(pk = id)
-    print(act.descripcion)
+    act.validado = True
+    # print(act.descripcion)
     form = ValidacionForm(request.POST, instance = act) # A form bound to the POST data
     if form.is_valid():
         form.save()
