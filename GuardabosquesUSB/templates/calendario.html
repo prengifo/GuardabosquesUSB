@@ -50,7 +50,7 @@
               </div>
               <nav class="collapse navbar-collapse" role="navigation">
                                 <ul class="nav navbar-nav">
-                {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
+                {% if admin %}
                   <li>
                     <a href="/main/validacion">Validación de Horas</a>
                   </li>
@@ -89,7 +89,7 @@
                         {{ request.user.username }}
                       {% endif %}
                       <i class="icon-sort-down"></i></a>
-                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
+                        {% if admin %}
                         <ul class="dropdown-menu pull-right">
                           <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
                         </ul>

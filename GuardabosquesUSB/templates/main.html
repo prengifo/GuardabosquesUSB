@@ -32,7 +32,7 @@
               </div>
               <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
-                {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
+                {% if admin %}
                   <li>
                     <a href="/main/validacion">Validación de Horas</a>
                   </li>
@@ -71,7 +71,7 @@
                         {{ request.user.username }}
                       {% endif %}
                       <i class="icon-sort-down"></i></a>
-                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
+                        {% if admin %}
                         <ul class="dropdown-menu pull-right">
                           <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
                         </ul>
@@ -94,7 +94,7 @@
                 <div class="panel-body">
                   <div class="column" style="text-align:center">
                     <br>
-                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
+                        {% if admin %}
                         <p>
                           Bienvenido al Sistema de Administración del Servicio Comunitario de los Guardabosques de la Universidad Simón Bolívar.
                           Como administrador podrá ver información de los estudiantes que se encuentran actualmente en el servicio, o ya lo han culminado.
@@ -103,7 +103,7 @@
                         {% else %}
                         <p>
                           Bienvenido al Sistema de Administración del Servicio Comunitario de los Guardabosques de la Universidad Simón Bolívar.
-                          Como estudiante podrá visulizar la agenda de las actividades a realizarse en los próximos días, administrar sus horas,
+                          Como estudiante podrá visualizar la agenda de las actividades a realizarse en los próximos días, administrar sus horas,
                           y consultar las actividades realizadas.
                         </p>
                         {% endif %}
