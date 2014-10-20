@@ -122,6 +122,7 @@
                         <th style="text-align:center">Actividad</th>
                         <th style="text-align:center">Fecha</th>
                         <th style="text-align:center">Validar</th>
+                         <th style="text-align:center">No validar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -141,6 +142,13 @@
                     {% csrf_token %}
                                       <input type="submit" value="Validar" />
                 </form>
+                      </td>
+                      <td style="padding: 5px">
+                           <form action="{% url 'GuardabosquesUSB.views.guardarNoValidacion' cest.0.instance.id %}" method="post">
+                              {{ cest.0.as_p }}
+                              {% csrf_token %}
+                              <input type="submit" value="No Validar" />
+                           </form>
                       </td>
                   </tr>
                     {% endfor %}

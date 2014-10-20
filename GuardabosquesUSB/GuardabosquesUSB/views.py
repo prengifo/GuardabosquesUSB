@@ -124,7 +124,7 @@ class ProfileUpdate(UpdateView):
 def determinarHoras(est):
 
     horas = 0
-    qs = Actividad.objects.filter(estudiante=est,validado=True)
+    qs = Actividad.objects.filter(estudiante=est,validado_nuevo=1)
 
     if qs:
         horas = qs.aggregate(Sum('horas')).get('horas__sum')
@@ -147,7 +147,7 @@ def actividades(request):
 def obtenerActividadesSinValidar():
     i = 1
     forms = []
-    acts = Actividad.objects.filter(validado=False)
+    acts = Actividad.objects.filter(validado_nuevo=0)
 
     for x in acts:
 
@@ -181,8 +181,23 @@ def guardarValidacion(request, id):
 
     print(id)
     act = Actividad.objects.get(pk = id)
-    act.validado = True
+    act.validado_nuevo = 1
     # print(act.descripcion)
+    form = ValidacionForm(request.POST, instance = act) # A form bound to the POST data
+    if form.is_valid():
+        form.save()
+        print('SALVE')
+
+    cforms = obtenerActividadesSinValidar()
+    return render(request, 'validacion.html' ,
+                  { 'forms': cforms, })
+
+
+def guardarNoValidacion(request, id):
+
+    print(id)
+    act = Actividad.objects.get(pk = id)
+    act.validado_nuevo = 2
     form = ValidacionForm(request.POST, instance = act) # A form bound to the POST data
     if form.is_valid():
         form.save()
@@ -307,7 +322,7 @@ class TipoActividadDeleteView(DeleteView):
 # Funcion para obtener las actividades realizadas y validadas por un estudiante
 def actividadesValidadas(est):
 
-    acts = Actividad.objects.filter(estudiante=est, validado=True)
+    acts = Actividad.objects.filter(estudiante=est, validado_nuevo=1)
     listaAct = []
 
     # Obtener para cada estudiante, sus horas hechas, y si es mayor o igual de 120,

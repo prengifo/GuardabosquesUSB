@@ -112,7 +112,7 @@
                           <th>Descripción</th>
                           <th>Horas</th>
                           <th>Fecha</th>
-                          <th>Validada</th>
+                          <th>Estatus</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -122,11 +122,7 @@
                           <td> {{ activ.horas }} </td>
                           <td> {{ activ.fecha }} </td>
 
-                          {% if activ.validado %}
-                          <td> Sí </td>
-                          {% else %}
-                          <td> No </td>
-                          {% endif %}
+                          <td>{{ activ.get_validado_nuevo_display }}</td>
                       </tr>
                       {% endfor %}
                   </tbody>

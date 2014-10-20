@@ -27,9 +27,16 @@ class Actividad(models.Model):
 
     )
 
+    HORAS_CHOICES= (
+        (0, 'Esperando validacion'),
+        (1, 'Horas Validadas'),
+        (2, 'Horas  Rechazadas'),
+
+    )
+
     horas        = models.IntegerField()
     descripcion  = models.ForeignKey(TipoActividad)
-    validado     = models.BooleanField(default=False)
+    validado_nuevo     = models.IntegerField(default=0,choices=HORAS_CHOICES)
     estudiante   = models.ForeignKey('login.Estudiante')
     fecha        = models.DateTimeField(default=datetime.now())
 
@@ -42,14 +49,3 @@ class ValidacionForm(ModelForm):
     class Meta:
         model = Actividad
         fields =  []
-        # widgets = {
-        #    'estudiante': forms.HiddpenInput(),
-        #    'id' : forms.HiddenInput(),
-        # }
-
-    # def clean_estudiante(self):
-    #     print "FUI LLAMADO"
-    #     estudiante = self.cleaned_data['estudiante']
-    #     if estudiante is None:
-    #         return self.fields['estudiante'].initial
-    #     return estudiante
