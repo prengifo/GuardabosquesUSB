@@ -34,7 +34,7 @@ class Actividad(models.Model):
 
     )
 
-    horas        = models.IntegerField()
+    horas        = models.PositiveIntegerField()
     descripcion  = models.ForeignKey(TipoActividad)
     validado_nuevo     = models.IntegerField(default=0,choices=HORAS_CHOICES)
     estudiante   = models.ForeignKey('login.Estudiante')
