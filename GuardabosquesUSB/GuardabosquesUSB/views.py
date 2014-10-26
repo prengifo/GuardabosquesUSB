@@ -1,6 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
+import ho.pisa as pisa
+from django.template.loader import get_template
+from django.template import Context
+import cStringIO as StringIO
 from django.template import RequestContext
 from models import ActividadForm, Actividad, ValidacionForm
 from login.models import Estudiante, EstudianteForm
@@ -137,9 +141,14 @@ def actividades(request):
 
     est = Estudiante.objects.get(user=request.user)
     acts = Actividad.objects.filter(estudiante=est)
+    horas = determinarHoras(est)
+    completado = False
+    if (horas >= 120):
+        completado = True
 
     return render(request, 'actividades.html', {
                   'acts': acts,
+                  'completado': completado,
                   })
 
 
@@ -224,11 +233,9 @@ def registroActividad(request):
 
     else:
         form = ActividadForm()
-
-    # Arturo esto no deberia estar indentado al mismo nivel que la variable form de arriba?
-    return render(request, 'registroActividad.html', {
-                  'form': form,
-                  })
+        return render(request, 'registroActividad.html', {
+                      'form': form,
+                      })
 
 
 # Funcion para obtener todos los estudiantes que no han completado el servicio
@@ -350,3 +357,30 @@ def horasAcumuladas(request):
                   'horas': horas,
                   'actividades': actividades,
                   })
+
+def generarReporte(request):
+    est = Estudiante.objects.get(user=request.user)
+    acts = Actividad.objects.filter(estudiante=est)
+    horas = determinarHoras(est)
+    completado = False
+    if (horas >= 120):
+        completado = True
+
+    return generar_pdf('reportePdf.html', {
+        'pagesize':'letter',
+        'acts': acts,
+        'completado': completado,
+        })
+
+
+
+def generar_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    context = Context(context_dict)
+    html  = template.render(context)
+    result = StringIO.StringIO()
+
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("utf-8")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), mimetype='application/pdf')
+    return HttpResponse('We had some errors<pre>%s</pre>' % escape(html))
