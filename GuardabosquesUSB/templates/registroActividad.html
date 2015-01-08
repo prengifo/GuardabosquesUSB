@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <title>Registro de Actividades - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,28 +16,28 @@
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
         <!-- CSS code from Bootply.com editor -->
-        
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">     
+
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
         <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
         <!-- JavaScript jQuery code from Bootply.com editor -->
-        
+
         <script type='text/javascript'>
-        
+
           $(document).ready(function() {
           });
-          
-        </script> 
+
+        </script>
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body>
-            
-        <header class="navbar navbar-bright navbar-fixed-top" role="banner">
+
+<header class="navbar navbar-bright navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
@@ -53,6 +53,12 @@
         <li id="selected">
           <a href="/main/actividades">Registro de Actividades</a>
         </li>
+        <li>
+          <a href="/main/calendario">Calendario</a>
+        </li>
+        <li>
+          <a href="/main/horas">Horas Acumuladas</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <li class="dropdown">
@@ -63,16 +69,10 @@
               {{ request.user.username }}
             {% endif %}
             <i class="icon-sort-down"></i></a>
-            {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
-              <ul class="dropdown-menu pull-right">
-                <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-              </ul>
-              {% else %}
               <ul class="dropdown-menu pull-right">
                 <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
                 <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
               </ul>
-              {% endif %}
         </li>
       </ul>
     </nav>
@@ -81,22 +81,29 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-12">
       <div class="panel">
         <div class="panel-body">
           <!--/stories-->
-          <div class="column">   
+          <div class="column">
             <br><br><br><br>
             <form action="{% url "GuardabosquesUSB.views.registroActividad" %}" method="post">{% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Registrar" />
-            </form>                                                                           	                                                
-          </div>                                                                                                             
-        </div>                                                
+            </form>
+          </div>
+        </div>
       </div><!--/col-12-->
     </div>
   </div>
-<div>     
-</body>
+  <div>
+    </body>
 
+        <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
+        <p>
+      <img src="/static/image/logo.png" height="40" width="40" style="
+    margin-top: -15px;
+           margin-left: 30px;">   Creado por DevLab USB
+        </p>
+    </footer>
 </html>

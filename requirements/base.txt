@@ -6,3 +6,5 @@ logutils==0.3.3
 South==0.8.2
 django-allauth
 django-debug-toolbar
+pisa
+reportlab

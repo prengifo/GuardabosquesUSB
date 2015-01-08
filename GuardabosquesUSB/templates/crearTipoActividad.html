@@ -4,7 +4,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Información de Estudiantes - Sistema Administrativo Guardabosques USB</title>
+        <title>Registro de Actividades - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -48,7 +48,6 @@
               });
           } );
         </script>
-
     </head>
 
     <!-- HTML code from Bootply.com editor -->
@@ -71,35 +70,35 @@
         <li>
           <a href="/main/validacion">Validación de Horas</a>
         </li>
-        <li>
-            <a href ="/main/actividades/registroTipoActividad">Crear Actividad</a>
+        <li id="selected">
+            <a href ="#">Crear Actividad</a>
         </li>
         <li>
           <a href="/main/calendario">Calendario</a>
         </li>
-        <li class="dropdown" id="selected">
+        <li class="dropdown">
           <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">Información de los Estudiantes</a><i class="icon-user"></i>
           <i class="icon-sort-down"></i></a>
           <ul class="dropdown-menu pull-right">
-              <li id="change_drop"><a id="change" href="#">Activos</a></li>
+              <li id="change_drop"><a id="change" href="/main/mostrarEstudiantesRestantes">Activos</a></li>
               <li id="log_out_drop"><a id="log_out" href="/main/mostrarEstudiantesFinalizados">Finalizados</a></li>
           </ul>
         </li>
-        </ul>
-        <ul class="nav navbar-nav pull-right">
-          <li class="dropdown">
-            <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
-              {% if request.user.first_name%}
-                {{ request.user.first_name }}
-              {% else %}
-                {{ request.user.username }}
-              {% endif %}
-              <i class="icon-sort-down"></i></a>
-                <ul class="dropdown-menu pull-right">
-                  <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-                </ul>
-          </li>
-        </ul>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        <li class="dropdown">
+          <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
+            {% if request.user.first_name%}
+              {{ request.user.first_name }}
+            {% else %}
+              {{ request.user.username }}
+            {% endif %}
+            <i class="icon-sort-down"></i></a>
+              <ul class="dropdown-menu pull-right">
+                <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+              </ul>
+        </li>
+      </ul>
     </nav>
   </div>
 </header>
@@ -109,36 +108,47 @@
     <div class="col-md-12">
       <div class="panel">
         <div class="panel-body">
-          <!--/stories-->
-          <div class="column">
+            <br></br>
+          <div class="column" style="text-align:center">
+            <p>
+              Agregue las nuevas actividades para que los estudiantes suban sus horas.
+            </p>
+          </div>
+          <div class-"column">
+            <br><br>
+            <form action="{% url "registroTipoActividad" %}" method="post">{% csrf_token %}
+                {{ form.as_p }}
+                <input  id="registroAct" type="submit" value="Registrar" />
+            </form>
+            <div class="column">
+                 <!-- aqui -->
             <br>
             <table id="table_id" border="1" class="display">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Carnet</th>
-                        <th>Carrera</th>
-                        <th>Horas completadas</th>
-                        <th>Horas restantes</th>
+                        <th style="text-align:center">Actividad</th>
+                        <th style="text-align:center">Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                  {% for cest in est %}
+                  {% for cest in actividades %}
+
                   <tr>
-                      <td> {{ cest.0 }} </td>
-                      <td> {{ cest.1 }} </td>
-                      <td> {{ cest.4 }} </td>
-                      <td> {{ cest.2 }} </td>
-                      <td> {{ cest.3 }} </td>
+                      <td> {{ cest }} </td>
+                      <td style="padding: 5px">
+
+                <form method="post" action="{% url 'borrarTipoActividad' cest.pk %}">{% csrf_token %}<input type="submit" name="submit" value="Eliminar"></form>
+                      </td>
                   </tr>
                     {% endfor %}
                 </tbody>
             </table>
+            </div>
           </div>
-      </div>
-    </div><!--/col-12-->
+      </div><!--/col-12-->
+    </div>
   </div>
-  </div>
+</div>
 
 </body>
 

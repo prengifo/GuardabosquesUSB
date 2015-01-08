@@ -15,14 +15,22 @@ h1,h2,h3,.highlight,.navbar a,#masthead h4 {
 }
 
 footer {
-  
+  position:fixed;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:40px;
   margin-top:40px;
-  padding-top:40px;
+  padding-top: 30px;
   padding-bottom:40px;
   background-color:#cecece;
   
 }
 
+p {
+  font-size: 16px;
+  font-family: sans-serif;
+}
 
 #masthead {
 min-height:130px;
@@ -177,6 +185,7 @@ a,a:hover {
 .centeredImage {
   display: block;
   margin-right: auto;
+  margin-left: auto;
   margin-top:1em;
 }
 
@@ -231,4 +240,8 @@ a,a:hover {
 
 #selected {
   background-color:#019834;
+}
+
+#main {
+  min-height: 900px
 }

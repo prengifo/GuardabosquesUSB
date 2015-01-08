@@ -8,18 +8,29 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'TipoActividad'
+        db.create_table(u'GuardabosquesUSB_tipoactividad', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('nombre', self.gf('django.db.models.fields.CharField')(max_length=200)),
+        ))
+        db.send_create_signal(u'GuardabosquesUSB', ['TipoActividad'])
+
         # Adding model 'Actividad'
         db.create_table(u'GuardabosquesUSB_actividad', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('horas', self.gf('django.db.models.fields.IntegerField')()),
-            ('descripcion', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('descripcion', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['GuardabosquesUSB.TipoActividad'])),
             ('validado', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('estudiante', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['login.Estudiante'])),
+            ('fecha', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime(2014, 10, 7, 0, 0))),
         ))
         db.send_create_signal(u'GuardabosquesUSB', ['Actividad'])
 
 
     def backwards(self, orm):
+        # Deleting model 'TipoActividad'
+        db.delete_table(u'GuardabosquesUSB_tipoactividad')
+
         # Deleting model 'Actividad'
         db.delete_table(u'GuardabosquesUSB_actividad')
 
@@ -27,11 +38,17 @@ class Migration(SchemaMigration):
     models = {
         u'GuardabosquesUSB.actividad': {
             'Meta': {'object_name': 'Actividad'},
-            'descripcion': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
+            'descripcion': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['GuardabosquesUSB.TipoActividad']"}),
             'estudiante': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['login.Estudiante']"}),
+            'fecha': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 10, 7, 0, 0)'}),
             'horas': ('django.db.models.fields.IntegerField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'validado': ('django.db.models.fields.BooleanField', [], {'default': 'False'})
+        },
+        u'GuardabosquesUSB.tipoactividad': {
+            'Meta': {'object_name': 'TipoActividad'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200'})
         },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -71,8 +88,8 @@ class Migration(SchemaMigration):
         },
         u'login.estudiante': {
             'Meta': {'object_name': 'Estudiante'},
-            'carnet': ('django.db.models.fields.CharField', [], {'max_length': '8'}),
-            'carrera': ('django.db.models.fields.IntegerField', [], {}),
+            'carnet': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '8'}),
+            'carrera': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['auth.User']", 'unique': 'True'})
         }

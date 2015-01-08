@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <title>Información de Estudiantes - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,26 +16,26 @@
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
         <!-- CSS code from Bootply.com editor -->
-        
-        <link href="{% static 'css/main.css' %}" rel="stylesheet">    
+
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
         <!-- JavaScript jQuery code from Bootply.com editor -->
-        
+
         <script type='text/javascript'>
-          $(document).ready(function() {        
+          $(document).ready(function() {
            });
         </script>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
-        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script> 
+        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
         <!-- DataTables CSS -->
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.css">
-          
+
         <!-- jQuery -->
         <script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-          
+
         <!-- DataTables -->
         <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.js"></script>
 
@@ -48,13 +48,13 @@
               });
           } );
         </script>
- 
+
     </head>
-    
+
     <!-- HTML code from Bootply.com editor -->
-    
+
     <body>
-            
+
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
   <div class="container">
     <div class="navbar-header">
@@ -68,43 +68,36 @@
     </div>
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-          {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
-          <li>
-            <a href="/main/validacion">Validación de Horas</a>
-          </li>
-          <li id="selected" class="dropdown">
-            <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">Información de los Estudiantes</a><i class="icon-user"></i>
+        <li>
+          <a href="/main/validacion">Validación de Horas</a>
+        </li>
+        <li>
+            <a href ="/main/actividades/registroTipoActividad">Crear Actividad</a>
+        </li>
+        <li>
+          <a href="/main/calendario">Calendario</a>
+        </li>
+        <li class="dropdown" id="selected">
+          <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">Información de los Estudiantes</a><i class="icon-user"></i>
+          <i class="icon-sort-down"></i></a>
+          <ul class="dropdown-menu pull-right">
+              <li id="change_drop"><a id="change" href="/main/mostrarEstudiantesRestantes">Activos</a></li>
+              <li id="log_out_drop"><a id="log_out" href="#">Finalizados</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        <li class="dropdown">
+          <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
+            {% if request.user.first_name%}
+              {{ request.user.first_name }}
+            {% else %}
+              {{ request.user.username }}
+            {% endif %}
             <i class="icon-sort-down"></i></a>
-            <ul class="dropdown-menu pull-right">
-                <li id="change_drop"><a id="change" href="/main/mostrarEstudiantesRestantes">Activos</a></li>
-                <li id="log_out_drop"><a id="log_out" href="/main/mostrarEstudiantesFinalizados">Finalizados</a></li>
-            </ul>
-          </li>
-        {% else %}
-          <li>
-            <a href="/main/actividades">Registro de Actividades</a>
-          </li>
-        {% endif %}
-        </ul>
-        <ul class="nav navbar-nav pull-right">
-          <li class="dropdown">
-            <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i>
-              {% if request.user.first_name%}
-                {{ request.user.first_name }}
-              {% else %}
-                {{ request.user.username }}
-              {% endif %}
-              <i class="icon-sort-down"></i></a>
-                {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
-                  <ul class="dropdown-menu pull-right">
-                    <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-                  </ul>
-                  {% else %}
-                  <ul class="dropdown-menu pull-right">
-                    <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
-                    <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-                  </ul>
-                  {% endif %}
+              <ul class="dropdown-menu pull-right">
+                <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+              </ul>
           </li>
         </ul>
     </nav>
@@ -113,11 +106,11 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-12">
       <div class="panel">
         <div class="panel-body">
           <!--/stories-->
-          <div class="column">    
+          <div class="column">
             <br>
             <table id="table_id" border="1" class="display">
                 <thead>
@@ -139,12 +132,19 @@
                     {% endfor %}
                 </tbody>
             </table>
-          </div>                                                                                                             
-      </div>                                                
+          </div>
+      </div>
     </div><!--/col-12-->
   </div>
-</div>                                                                                                                      
-                                                    
+  </div>
+
 </body>
 
+    <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
+        <p>
+      <img src="/static/image/logo.png" height="40" width="40" style="
+    margin-top: -15px;
+           margin-left: 30px;">   Creado por DevLab USB
+        </p>
+    </footer>
 </html>

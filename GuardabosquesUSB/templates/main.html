@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <title>Menú Principal - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,33 +12,20 @@
         <![endif]-->
         <link href="{% static 'css/font-awesome.min.css' %}" type="text/css" rel="stylesheet">
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript">
-          google.load("visualization", "1", {packages:["corechart"]});
-          google.setOnLoadCallback(drawChart);
-          function drawChart() {
-            var resto = 120 - {{ horas }}
-            var data = google.visualization.arrayToDataTable([
-              ['Task', 'Horas completadas'],
-              ['Completadas',     {{ horas }}],
-              ['Restantes',     resto]
-            ]);
-
-            var options = {
-              title: 'Mis Horas',
-              legend: 'none'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-            chart.draw(data, options);
-          }
-        </script>
         <link href="{% static 'css/main.css' %}" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
+        <!-- JavaScript jQuery code from Bootply.com editor -->
+        <script type='text/javascript'>
+        $(document).ready(function() {
+        });
+        </script>
     </head>
-    
+
     <body>
-    
+
     {% if dominio %}
-        
+
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
             <div class="container">
               <div class="navbar-header">
@@ -52,9 +39,15 @@
               </div>
               <nav class="collapse navbar-collapse" role="navigation">
                 <ul class="nav navbar-nav">
-                {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'app.guardabosques@gmail.com' %}
+                {% if admin %}
                   <li>
                     <a href="/main/validacion">Validación de Horas</a>
+                  </li>
+                  <li>
+                      <a href ="/main/actividades/registroTipoActividad">Crear Actividad</a>
+                  </li>
+                  <li>
+                    <a href="/main/calendario">Calendario</a>
                   </li>
                   <li class="dropdown">
                     <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">Información de los Estudiantes</a><i class="icon-user"></i>
@@ -68,6 +61,12 @@
                   <li>
                     <a href="/main/actividades">Registro de Actividades</a>
                   </li>
+                  <li>
+                    <a href="/main/calendario">Calendario</a>
+                  </li>
+                  <li>
+                    <a href="/main/horas">Horas Acumuladas</a>
+                  </li>
                 {% endif %}
                 </ul>
                 <ul class="nav navbar-nav pull-right">
@@ -79,7 +78,7 @@
                         {{ request.user.username }}
                       {% endif %}
                       <i class="icon-sort-down"></i></a>
-                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
+                        {% if admin %}
                         <ul class="dropdown-menu pull-right">
                           <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
                         </ul>
@@ -95,51 +94,49 @@
             </div>
         </header>
 
-        <div class="container">
+        <div class="container" id="main">
           <div class="row">
-            <div class="col-md-12"> 
+            <div class="col-md-12">
               <div class="panel">
                 <div class="panel-body">
-                  <!--/stories-->
-                  <div class="column">    
+                  <div class="column" style="text-align:center">
                     <br>
-                        {% if request.user.email == 'arturo.voltattorni@gmail.com' or request.user.email == 'patrick.rengifo@gmail.com' or request.user.email == 'danielar92@gmail.com' or request.user.email == 'usb.guardaboques.app@gmail.com' %}
-                        {% else %}
-                        <div id="piechart" style="width: 400px; height: 400px;"></div>
-                        </div>
-                        {% endif %}
-                        <iframe id="calendario" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-                        <script type="text/javascript">
-                          var correo = 'https://www.google.com/calendar/embed?src=usb.guardaboques.app@gmail.com';
-                          document.getElementById("calendario").src = correo;       
-                        </script>
-                        <hr>
-                  </div>                                                                                                             
-              </div>                                                
-            </div><!--/col-12-->
+                    {% if admin %}
+                    <p>
+                      Bienvenido al Sistema de Administración del Servicio Comunitario de los Guardabosques de la Universidad Simón Bolívar.
+                      Como administrador podrá ver información de los estudiantes que se encuentran actualmente en el servicio, o ya lo han culminado.
+                      Validar las horas de las actividades registradas por los estudiantes, crear eventos futuros y nuevas actividades.
+                    </p>
+                    {% else %}
+                    <p>
+                      Bienvenido al Sistema de Administración del Servicio Comunitario de los Guardabosques de la Universidad Simón Bolívar.
+                      Como estudiante podrá visualizar la agenda de las actividades a realizarse en los próximos días, administrar sus horas,
+                      y consultar las actividades realizadas.
+                    </p>
+                    {% endif %}
+                    <img class="centeredImage" src="{% static 'image/logo_gbusb.png' %}" height=110 width=500>
+                    <hr>
+                  </div>
+                </div>
+              </div><!--/col-12-->
+            </div>
           </div>
+          <footer >
+            <p>
+              <img src="/static/image/logo.png" height="40" width="40" style="
+              margin-top: -15px;
+              margin-left: 30px;">   Creado por DevLab USB
+            </p>
+          </footer>
         </div>
         <hr>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <script type='text/javascript' src="{% static 'js/bootstrap.min.js' %}"></script>
 
-        <!-- JavaScript jQuery code from Bootply.com editor -->
-        
-        <script type='text/javascript'>
-        
-        $(document).ready(function() {
-        
-            
-        
-        });
-        
-        </script>
-        
     </body>
-    
+
     {% else %}
         <h1>Necesita entrar con una cuenta USB.VE</h1>
         <h3><a href="/accounts/logout/">Volver a Inicio</a></h3>
     </body>
     {% endif %}
+
 </html>

@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Actualizar Mis Datos - Sistema Administrativo Guardabosques USB</title>
+        <title>Calendario - Sistema Administrativo Guardabosques USB</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -16,6 +16,7 @@
     </head>
 
     <body>
+
         <header class="navbar navbar-bright navbar-fixed-top" role="banner">
             <div class="container">
               <div class="navbar-header">
@@ -28,7 +29,7 @@
                 <a href="/main/home" class="navbar-brand">Inicio</a>
               </div>
               <nav class="collapse navbar-collapse" role="navigation">
-                <ul class="nav navbar-nav">
+                                <ul class="nav navbar-nav">
                 {% if admin %}
                   <li>
                     <a href="/main/validacion">Validación de Horas</a>
@@ -36,8 +37,8 @@
                   <li>
                       <a href ="/main/actividades/registroTipoActividad">Crear Actividad</a>
                   </li>
-                  <li>
-                    <a href="/main/calendario">Calendario</a>
+                  <li id="selected">
+                    <a href="#">Calendario</a>
                   </li>
                   <li class="dropdown">
                     <a href="#" id="nbAcctDD" class="dropdown-toggle" data-toggle="dropdown">Información de los Estudiantes</a><i class="icon-user"></i>
@@ -51,8 +52,8 @@
                   <li>
                     <a href="/main/actividades">Registro de Actividades</a>
                   </li>
-                  <li>
-                    <a href="/main/calendario">Calendario</a>
+                  <li id="selected">
+                    <a href="#">Calendario</a>
                   </li>
                   <li>
                     <a href="/main/horas">Horas Acumuladas</a>
@@ -68,10 +69,16 @@
                         {{ request.user.username }}
                       {% endif %}
                       <i class="icon-sort-down"></i></a>
-                      <ul class="dropdown-menu pull-right">
-                        <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
-                        <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
-                      </ul>
+                        {% if admin %}
+                        <ul class="dropdown-menu pull-right">
+                          <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+                        </ul>
+                        {% else %}
+                        <ul class="dropdown-menu pull-right">
+                          <li id="change_drop"><a id="change" href="/main/actualizar">Mis Datos</a></li>
+                          <li id="log_out_drop"><a id="log_out" href="/accounts/logout/">Cerrar Sesión</a></li>
+                        </ul>
+                        {% endif %}
                   </li>
                 </ul>
               </nav>
@@ -84,12 +91,19 @@
               <div class="panel">
                 <div class="panel-body">
                   <!--/stories-->
-                  <div class="column">
-                  <form action="{% url 'registry' %}" method="post">{% csrf_token %}
-                      {{ form.as_p }}
-                      <input type="submit" value="Guardar" />
-                    </form>
+                  <div class="column" style="text-align:center">
+                    <p>
+                      Visualice los eventos próximos en los cuales podrá participar.
+                    </p>
+                    <br>
+                        <iframe id="calendario" style="border: 0" width="1000" height="500" frameborder="0" scrolling="no"></iframe>
+                        <script type="text/javascript">
+                          var correo = 'https://www.google.com/calendar/embed?src=app.guardabosques@gmail.com';
+                          document.getElementById("calendario").src = correo;
+                        </script>
+                        <hr>
                   </div>
+                </div>
               </div>
             </div><!--/col-12-->
           </div>
@@ -112,7 +126,7 @@
 
     </body>
 
-        <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
+    <footer style="position:absolute;left:0;bottom:0;width:100%;height:40px;">
         <p>
       <img src="/static/image/logo.png" height="40" width="40" style="
     margin-top: -15px;
