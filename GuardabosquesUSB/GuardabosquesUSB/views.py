@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
-import ho.pisa as pisa
+import xhtml2pdf.pisa as pisa
 from django.template.loader import get_template
 from django.template import Context
 import cStringIO as StringIO
