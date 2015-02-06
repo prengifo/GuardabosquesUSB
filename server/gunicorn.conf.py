@@ -8,10 +8,10 @@ def num_cpus():
 preload = True
 workers = num_cpus() * 2 + 1
 bind = '127.0.0.1:8000'
-pid = '/home/kpantic/devlabs-test/var/gunicorn.prod.pid'
+pid = '/home/guardabosques/GuardabosquesUSB/var/gunicorn.prod.pid'
 django_settings = 'devlabs.settings.local'
 
 # log files
-accesslog = '/home/kpantic/devlabs-test/server/gunicorn-access.log'
-errorlog = '/home/kpantic/devlabs-test/server/gunicorn-error.log'
+accesslog = '/home/guardabosques/GuardabosquesUSB/server/gunicorn-access.log'
+errorlog = '/home/guardabosques/GuardabosquesUSB/gunicorn-error.log'
 loglevel = 'debug'
