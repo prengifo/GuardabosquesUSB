@@ -116,7 +116,7 @@ SECRET_KEY = r"+e3_jio0z&219i0!htgvca&vcq%ypu)^_xrk1oo&^5s%$$j9d*"
 ########## SITE CONFIGURATION
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'devlabs.talpor.com']
 ########## END SITE CONFIGURATION
 
 
